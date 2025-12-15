@@ -5,6 +5,7 @@
     "npm:@sveltejs/kit@^2.49.1": "2.49.2_@sveltejs+vite-plugin-svelte@6.2.1__svelte@5.46.0___acorn@8.15.0__vite@7.3.0___picomatch@4.0.3_svelte@5.46.0__acorn@8.15.0_vite@7.3.0__picomatch@4.0.3_acorn@8.15.0",
     "npm:@sveltejs/vite-plugin-svelte@^6.2.1": "6.2.1_svelte@5.46.0__acorn@8.15.0_vite@7.3.0__picomatch@4.0.3",
     "npm:@tailwindcss/vite@^4.1.17": "4.1.18_vite@7.3.0__picomatch@4.0.3",
+    "npm:prettier@^3.7.4": "3.7.4",
     "npm:svelte-check@^4.3.4": "4.3.4_svelte@5.46.0__acorn@8.15.0_typescript@5.9.3",
     "npm:svelte-preprocess@^6.0.3": "6.0.3_svelte@5.46.0__acorn@8.15.0_typescript@5.9.3",
     "npm:svelte@^5.45.6": "5.46.0_acorn@8.15.0",
@@ -711,6 +712,10 @@
         "source-map-js"
       ]
     },
+    "prettier@3.7.4": {
+      "integrity": "sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==",
+      "bin": true
+    },
     "readdirp@4.1.2": {
       "integrity": "sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg=="
     },
@@ -868,10 +873,10 @@
         "npm:@sveltejs/kit@^2.49.1",
         "npm:@sveltejs/vite-plugin-svelte@^6.2.1",
         "npm:@tailwindcss/vite@^4.1.17",
+        "npm:prettier@^3.7.4",
         "npm:svelte-check@^4.3.4",
         "npm:svelte-preprocess@^6.0.3",
         "npm:svelte@^5.45.6",
-        "npm:tailwindcss@^4.1.17",
         "npm:typescript@^5.9.3",
         "npm:vite@^7.2.6"
       ]
