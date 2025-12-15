@@ -1,6 +1,5 @@
 <script lang="ts">
     export let data;
-    console.log('DATA', data)
 </script>
 
 <div class="container mt-5">
