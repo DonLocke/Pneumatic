@@ -1,4 +1,7 @@
-<div class="grid">
-    <h1 class="title">Welcome to SvelteKit</h1>
-    <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<div class="container mt-5">
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <h1 class="title has-text-centered">SAFE BOXES</h1>
+        </div>
+    </div>
 </div>
