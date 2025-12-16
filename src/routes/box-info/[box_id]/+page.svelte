@@ -11,7 +11,7 @@
 
 <section class="hero is-primary">
   <div class="hero-body">
-    <div class="title has-text-centered">Box {boxNumber} Information</div>
+    <div class="title has-text-centered">{branch} Box #{boxNumber}</div>
   </div>
 </section>
 <div class="container mt-5">
