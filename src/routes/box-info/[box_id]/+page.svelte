@@ -1,8 +1,9 @@
 <script lang="ts">
   export let data;
-  const boxID = data.box.id;
-  const branch = data.box.branch;
-  const address = data.box.address;
+
+  const boxID = data.box_id;
+  const branch = data.branch_name;
+  const address = data.branch_address;
 </script>
 
 

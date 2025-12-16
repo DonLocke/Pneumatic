@@ -1,3 +1,6 @@
 {
-  "deno.enablePaths": ["./deno.json"]
+  "deno.enablePaths": ["./deno.json"],
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
 }
