@@ -18,7 +18,7 @@
       <img src={favicon} alt="box" class="image is-64x64" />
     </a>
   </div>
-  <div class="navbar-menu">
+  <div class="navbar-menu is-active">
     <div class="navbar-end">
       <div class="navbar-item">
         <form action="/login?/logout" method="POST">
