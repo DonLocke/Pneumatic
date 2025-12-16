@@ -49,9 +49,9 @@
         </div>
         <div class="button is-ghost">
           <span class="icon has-text-success">
-            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+            <i class="fa fa-users fa-lg" aria-hidden="true"></i>
           </span>
-          <p>Cancel Box</p>
+          <p>Transfer Box</p>
         </div>
       </div>
       <article class="message is-large">
