@@ -1,14 +1,27 @@
 import { redirect } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "./$types";
+import type { Actions } from "./$types";
 
 export const actions = {
-  default: async ({ request, cookies, locals }) => {
+  login: async ({ request, cookies, locals }) => {
     const form = await request.formData();
-    const username = form.get("username")?.toString() ?? "unknown";
-    const result = await locals.postgres?.query("SELECT customer_id, customer_name, customer_username, customer_password FROM customers WHERE customer_username = $1", [username]);
+    const username = form.get("username")?.toString();
+    const password = form.get("password")?.toString();
+    const result = await locals.postgres?.query("SELECT customer_id, customer_name, customer_username, customer_password FROM customers WHERE customer_username = $1 AND customer_password = $2", [username, password]);
+    
+    if (result?.rowCount != 1) {
+      throw redirect(303, "/login");
+    }
+    
     const user = result?.rows[0];
     
-    cookies.set("sessionid", user.customer_id, { path: "/" });
+    cookies.set("sessionid", user.customer_id, { path: '/' });
     redirect(303, "/");
   },
+  logout: async ({ cookies, locals }) => {
+    console.log("logging out!");
+    cookies.delete("sessionid", { path: '/' })
+    locals.user = null;
+
+    throw redirect(303, "/login");
+  }
 } satisfies Actions;
