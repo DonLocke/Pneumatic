@@ -21,7 +21,7 @@ export const load = async ({ locals, params }) => {
   );
 
   const paymentHistory = await locals.postgres.query(
-    "SELECT payment_history.box_id, customer_id, payment_amount, payment_date FROM payment_history JOIN boxes ON payment_history_id = boxes.box_id WHERE payment_history.box_id = $1",
+    "SELECT payment_history.box_id, customer_id, payment_amount, payment_date FROM payment_history JOIN boxes ON payment_history.box_id = boxes.box_id WHERE payment_history.box_id = $1",
     [params.box_id]
   );
 

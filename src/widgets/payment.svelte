@@ -10,7 +10,7 @@
   <h1 class="title">Payment Information</h1>
   <div class="grid">
     <div class="cell">
-      <p class="title is-4">Status:</p>
+      <p class="title is-4">Status</p>
       <p class="subtitle is-4">{boxInfo.payment_status}</p>
     </div>
     <div class="cell">
