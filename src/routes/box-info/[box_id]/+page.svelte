@@ -1,5 +1,6 @@
 <script lang="ts">
   import Payment from "../../../widgets/payment.svelte";
+  import PaymentHistory from "../../../widgets/payment-history.svelte";
   import Schedule from "../../../widgets/schedule.svelte";
   import History from "../../../widgets/history.svelte";
   import Users from "../../../widgets/users.svelte";
@@ -69,11 +70,8 @@
         </div>
       </article>
       <Users authorizedUsers={data.authorizedUsers} />
-      <Payment
-        boxInfo={data.box}
-        paymentInfo={data.payment}
-        paymentHistory={data.paymentHistory}
-      ></Payment>
+      <Payment boxInfo={data.box} paymentInfo={data.payment}></Payment>
+      <PaymentHistory paymentHistory={data.paymentHistory} />
       <History boxHistory={data.boxHistory} />
       <Schedule appointments={data.appointment} branchName={branch}></Schedule>
     </div>

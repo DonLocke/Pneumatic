@@ -74,11 +74,11 @@ INSERT INTO branches (branch_id, branch_address, branch_name) VALUES
     (2, '6000 South Park Ave, Hamburg, NY 14075', 'Hamburg'),
     (3, '709 Elmwood Ave, Buffalo, NY 14203', 'Elmwood Plaza');
 INSERT INTO boxes (box_id, box_number, branch_id, box_cost, payment_status) VALUES
-    (1, 100, 1, 29.99, 'PAID'),
+    (1, 100, 1, 29.99, 'UNPAID'),
     (2, 101, 1, 29.99, 'UNPAID'),
     (3, 102, 1, 29.99, 'PENDING'),
     (4, 200, 1, 29.99, 'PAID'),
-    (5, 100, 2, 29.99, 'PAID'),
+    (5, 100, 2, 29.99, 'UNPAID'),
     (6, 105, 2, 29.99, 'PAID'),
     (7, 106, 2, 29.99, 'PAID'),
     (8, 205, 2, 29.99, 'PAID'),
@@ -94,7 +94,12 @@ INSERT INTO box_history (box_id, event_type, event_date) VALUES
     (1, 'opened', NOW() - INTERVAL '5 minutes'),
     (1, 'closed', NOW()),
     (2, 'opened', NOW());
-INSERT INTO payment_history (box_id, customer_id, payment_amount) VALUES
-    (1, 1, 15.60);
+INSERT INTO payment_history (box_id, customer_id, payment_amount, payment_date) VALUES
+    (1, 1, 15.60, NOW() - INTERVAL '2 years'),
+    (1, 1, 15.60, NOW() - INTERVAL '1 year'),
+    (6, 2, 29.99, NOW()),
+    (7, 3, 29.99, NOW() - INTERVAL '25 days'),
+    (8, 4, 29.99, NOW() - INTERVAL '30 days'),
+    (9, 5, 29.99, NOW() - INTERVAL '35 days');
 INSERT INTO appointments(appointment_id, customer_id, branch_id, appointment_date) VALUES
     (1, 1, 1, '2025-12-25 12:00:00-05:00');

@@ -3,44 +3,43 @@
   export let branchName;
 
   import { getFormattedDate, getFormattedTime } from "../date";
-   
 </script>
 
-<box class="box">
-<h1 class="title">Scheduled Appointments</h1>
-
-{#if appointments.length > 0}
-<table class="table is-fullwidth">
-    <thead>
-    <tr>
-      <th><appr title="ID">ID</appr></th>
-      <th><appr title="Branch Name"> Branch</appr></th>
-      <th><appr title="Date"> Date</appr></th>
-      <th><appr title="Time">Time</appr></th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each appointments as appointment}
-    <tr>
-        <td>
-          {appointment.appointment_id}
-        </td>
-        <td>
-          {branchName}
-        </td>
-        <td>
-          {getFormattedDate(appointment.appointment_date)}
-        </td>
-        <td>
-          {getFormattedTime(appointment.appointment_date)}
-        </td>
-      </tr>
-    {/each}
-  </tbody>
-</table>
-{:else}
-<div class="buttons is-centered">
-    <div class="button">
+<div class="message is-large">
+  <div class="message-header">Scheduled Appointments</div>
+  <div class="message-body">
+    {#if appointments.length > 0}
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th><appr title="ID">ID</appr></th>
+            <th><appr title="Branch Name"> Branch</appr></th>
+            <th><appr title="Date"> Date</appr></th>
+            <th><appr title="Time">Time</appr></th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each appointments as appointment}
+            <tr>
+              <td>
+                {appointment.appointment_id}
+              </td>
+              <td>
+                {branchName}
+              </td>
+              <td>
+                {getFormattedDate(appointment.appointment_date)}
+              </td>
+              <td>
+                {getFormattedTime(appointment.appointment_date)}
+              </td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    {:else}
+      <div class="buttons is-centered">
+        <div class="button">
           <span class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
               <path
@@ -50,9 +49,8 @@
             </svg>
           </span>
           <p>Schedule an Appointment</p>
+        </div>
+      </div>
+    {/if}
   </div>
 </div>
-
-{/if}
-
-</box>
