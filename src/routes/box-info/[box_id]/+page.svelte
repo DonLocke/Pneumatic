@@ -1,15 +1,16 @@
 <script lang="ts">
   export let data;
-  import History from '../../../widgets/History.svelte';
-  const boxID = data.box.id;
-  const branch = data.box.branch;
-  const address = data.box.address;
-</script>
 
+  import History from "../../../widgets/History.svelte";
+  const boxID = data.box_id;
+  const boxNumber = data.box_number;
+  const branch = data.branch_name;
+  const address = data.branch_address;
+</script>
 
 <section class="hero is-primary">
   <div class="hero-body">
-    <div class="title has-text-centered">Box {boxID} Information</div>
+    <div class="title has-text-centered">Box {boxNumber} Information</div>
   </div>
 </section>
 <div class="container mt-5">
@@ -69,7 +70,7 @@
       </div>
       <div class="box">
         <h1 class="title">History Information</h1>
-        <p><History {boxID}/></p>
+        <p><History {boxID} /></p>
       </div>
       <div class="box">
         <h1 class="title">Authorzed Users</h1>

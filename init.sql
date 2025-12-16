@@ -1,7 +1,8 @@
 -- Create Tables
 CREATE TABLE branches (
     branch_id INT PRIMARY KEY, 
-    branch_address TEXT
+    branch_address TEXT,
+    branch_name TEXT
 );
 
 CREATE TABLE customers (
@@ -49,7 +50,7 @@ CREATE TABLE payment_history (
 
 -- Add Data
 INSERT INTO customers (customer_id, customer_name) VALUES (1, 'Dave Johnson');
-INSERT INTO branches (branch_id, branch_address) VALUES (1, '1 Seneca St. Buffalo NY, 14216');
+INSERT INTO branches (branch_id, branch_address, branch_name) VALUES (1, '1 Seneca St. Buffalo NY, 14216', 'Seneca One');
 INSERT INTO boxes (box_id, box_number, branch_id, box_cost) VALUES (1, 1, 1, 29.99);
 INSERT INTO customer_to_boxes (box_id, customer_id, rel_code) VALUES (1, 1, 'PRI');
 INSERT INTO box_history (box_id, event_type) VALUES (1, 'opened');
