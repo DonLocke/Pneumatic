@@ -1,5 +1,6 @@
 <script lang="ts">
   import Payment from "../../../widgets/payment.svelte";
+  import Schedule from "../../../widgets/schedule.svelte";
   export let data;
 
   const boxID = data.box.box_id;
@@ -78,6 +79,7 @@
         <p>Coming in widget?</p>
       </div>
       <Payment paymentInfo={data.payment}></Payment>
+      <Schedule appointments={data.appointment} branchName={branch}></Schedule>
     </div>
   </div>
 </div>
