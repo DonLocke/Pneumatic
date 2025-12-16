@@ -38,6 +38,6 @@ export const load = async ({ locals, params }) => {
     payment: paymentResult.rows[0],
     boxHistory: boxHistoryResult.rows,
     paymentHistory: paymentHistory.rows,
-    appointment: appointmentResult.rows;
+    appointment: appointmentResult.rows
   };
 };

@@ -97,7 +97,6 @@
         <p class="subtitle">Primary User: Foo Bar III</p>
         <p>Coming in widget?</p>
       </div>
-      <Payment paymentInfo={data.payment}></Payment>
       <Schedule appointments={data.appointment} branchName={branch}></Schedule>
     </div>
   </div>
