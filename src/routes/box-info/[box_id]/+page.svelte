@@ -1,11 +1,11 @@
 <script lang="ts">
+  import Schedule from "../../../widgets/schedule.svelte";
   export let data;
 
   const boxID = data.box_id;
   const branch = data.branch_name;
   const address = data.branch_address;
 </script>
-
 
 <section class="hero is-primary">
   <div class="hero-body">
@@ -76,6 +76,7 @@
         <p class="subtitle">Primary User: Foo Bar III</p>
         <p>Coming in widget?</p>
       </div>
+      <Schedule></Schedule>
     </div>
   </div>
 </div>
