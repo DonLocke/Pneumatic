@@ -1,11 +1,13 @@
 <script lang="ts">
     export let data;
 </script>
+
 <section class="hero is-primary">
   <div class="hero-body">
     <p class="title has-text-centered">SAFE BOX</p>
   </div>
 </section>
+
 <div class="container mt-5">
     <div class="columns is-centered">
         <div class="column is-half">

@@ -12,7 +12,6 @@
   />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </svelte:head>
-
 <nav class="navbar m-2">
   <div class="navbar-brand">
     <a class="button is-ghost" href="/">
@@ -30,4 +29,10 @@
   </div>
 </nav>
 
-{@render children()}
+  {@render children()}
+
+<footer class="footer mt-6">
+  <div class="content has-text-centered">
+    Website created by team <strong>Pneumatic</strong> for the 2025 71Tech Hackathon.
+  </div>
+</footer>
