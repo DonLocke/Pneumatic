@@ -17,7 +17,7 @@
 <div class="container mt-5">
     <div class="columns is-centered">
         <div class="column is-half">
-            <h1 class="title has-text-centered">Welcome {data.user}</h1>
+            <h1 class="title has-text-centered">Welcome {data.user.customer_name}</h1>
         </div>
     </div>
 
