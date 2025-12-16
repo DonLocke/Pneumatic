@@ -12,29 +12,29 @@ CREATE TABLE customers (
     customer_password TEXT
 );
 
-CREATE TYPE box_payment_status AS ENUM ('PAID', 'UNPAID', 'PENDING');
-
 CREATE TABLE boxes (
     box_id INT PRIMARY KEY,
     box_number INT,
     branch_id INT,
     box_cost DECIMAL,
-    payment_status box_payment_status,
     FOREIGN KEY (branch_id) REFERENCES branches (branch_id)
 );
 
 CREATE TYPE relationship_code AS ENUM ('PRI', 'SEC');
 
+CREATE TYPE box_payment_status AS ENUM ('PAID', 'UNPAID', 'PENDING');
+
 CREATE TABLE customer_to_boxes (
     box_id INT,
     customer_id INT,
     rel_code relationship_code,
+    payment_status box_payment_status DEFAULT 'PENDING',
     PRIMARY KEY (box_id, customer_id),
     FOREIGN KEY (box_id) REFERENCES boxes (box_id),
     FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
 );
 
-CREATE TYPE box_event AS ENUM ('opened', 'closed');
+CREATE TYPE box_event AS ENUM ('OPEN', 'CLOSED');
 
 CREATE TABLE box_history (
     box_id INT,
@@ -73,27 +73,27 @@ INSERT INTO branches (branch_id, branch_address, branch_name) VALUES
     (1, 'One Fountain Plz, Buffalo, NY 1403', 'Fountain Plaza'),
     (2, '6000 South Park Ave, Hamburg, NY 14075', 'Hamburg'),
     (3, '709 Elmwood Ave, Buffalo, NY 14203', 'Elmwood Plaza');
-INSERT INTO boxes (box_id, box_number, branch_id, box_cost, payment_status) VALUES
-    (1, 100, 1, 29.99, 'UNPAID'),
-    (2, 101, 1, 29.99, 'UNPAID'),
-    (3, 102, 1, 29.99, 'PENDING'),
-    (4, 200, 1, 29.99, 'PAID'),
-    (5, 100, 2, 29.99, 'UNPAID'),
-    (6, 105, 2, 29.99, 'PAID'),
-    (7, 106, 2, 29.99, 'PAID'),
-    (8, 205, 2, 29.99, 'PAID'),
-    (9, 306, 3, 29.99, 'PAID'),
-    (10, 401, 3, 29.99, 'PAID'),
-    (11, 599, 3, 29.99, 'PAID');
-INSERT INTO customer_to_boxes (box_id, customer_id, rel_code) VALUES
-    (1, 1, 'PRI'),
-    (1, 5, 'SEC'),
-    (2, 2, 'PRI'),
-    (3, 3, 'PRI');
+INSERT INTO boxes (box_id, box_number, branch_id, box_cost) VALUES
+    (1, 100, 1, 29.99),
+    (2, 101, 1, 29.99),
+    (3, 102, 1, 29.99),
+    (4, 200, 1, 29.99),
+    (5, 100, 2, 29.99),
+    (6, 105, 2, 29.99),
+    (7, 106, 2, 29.99),
+    (8, 205, 2, 29.99),
+    (9, 306, 3, 29.99),
+    (10, 401, 3, 29.99),
+    (11, 599, 3, 29.99);
+INSERT INTO customer_to_boxes (box_id, customer_id, rel_code, payment_status) VALUES
+    (1, 1, 'PRI', 'UNPAID'),
+    (1, 5, 'SEC', 'UNPAID'),
+    (2, 2, 'PRI', 'UNPAID'),
+    (3, 3, 'PRI', 'PENDING');
 INSERT INTO box_history (box_id, event_type, event_date) VALUES
-    (1, 'opened', NOW() - INTERVAL '5 minutes'),
-    (1, 'closed', NOW()),
-    (2, 'opened', NOW());
+    (1, 'OPEN', NOW() - INTERVAL '5 minutes'),
+    (1, 'CLOSED', NOW()),
+    (2, 'OPEN', NOW());
 INSERT INTO payment_history (box_id, customer_id, payment_amount, payment_date) VALUES
     (1, 1, 15.60, NOW() - INTERVAL '2 years'),
     (1, 1, 15.60, NOW() - INTERVAL '1 year'),
