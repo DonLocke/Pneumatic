@@ -1,6 +1,14 @@
+<script lang="ts">
+  export let data;
+  const boxID = data.box.id;
+  const branch = data.box.branch;
+  const address = data.box.address;
+</script>
+
+
 <section class="hero is-primary">
   <div class="hero-body">
-    <div class="title has-text-centered">Box $BOX_NUMBER Information</div>
+    <div class="title has-text-centered">Box {boxID} Information</div>
   </div>
 </section>
 <div class="container mt-5">
@@ -45,11 +53,11 @@
         <div class="grid">
           <div class="cell">
             <p class="title is-4">Branch</p>
-            <p class="subtitle is-4">Seneca One</p>
+            <p class="subtitle is-4">{branch}</p>
           </div>
           <div class="cell">
             <p class="title is-4">Address</p>
-            <p class="subtitle is-4">1 Seneca St, Buffalo NY, 14202</p>
+            <p class="subtitle is-4">{address}</p>
           </div>
         </div>
       </div>

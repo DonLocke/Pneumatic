@@ -5,7 +5,7 @@
 		{ id: 1, branch: 'Plaza' },
 		{ id: 2, branch: 'Elmwood' },
 		{ id: 3, branch: 'Pearl' },
-		{ id: 4, branch: 'Deleware' },
+		{ id: 4, branch: 'Delaware' },
 		{ id: 5, branch: 'Plaza' }
 	];
 </script>
@@ -23,16 +23,19 @@
 
     <div class="grid is-col-min-15">
         {#each boxes as box}
-            <div class="cell">
+        <div class="cell">
             <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">Box #{box.id}</p>
-                </header>
-                <div class="card-content">
-                    <div class="content">
-                    <p>Branch: {box.branch}</p>
+                <a href="/box-info/{box.id}">
+                    <header class="card-header">
+                        <p class="card-header-title">Box #{box.id}</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            <span class="has-text-weight-bold has-text-primary">Branch: </span>
+                            <span class="has-text-primary">{box.branch}</span>
+                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         {/each}
