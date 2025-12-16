@@ -1,5 +1,6 @@
 <script lang="ts">
   import Payment from "../../../widgets/payment.svelte";
+  import Schedule from "../../../widgets/schedule.svelte";
   import History from "../../../widgets/history.svelte";
   import Users from "../../../widgets/users.svelte";
   export let data;
@@ -74,6 +75,7 @@
         paymentHistory={data.paymentHistory}
       ></Payment>
       <History boxHistory={data.boxHistory} />
+      <Schedule appointments={data.appointment} branchName={branch}></Schedule>
     </div>
   </div>
 </div>
