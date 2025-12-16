@@ -1,6 +1,7 @@
 <script lang="ts">
   import Payment from "../../../widgets/payment.svelte";
   import History from "../../../widgets/history.svelte";
+  import Users from "../../../widgets/users.svelte";
   export let data;
 
   const boxID = data.box.box_id;
@@ -83,6 +84,7 @@
           </div>
         </div>
       </div>
+      <Users authorizedUsers={data.authorizedUsers} />
       <Payment
         boxInfo={data.box}
         paymentInfo={data.payment}

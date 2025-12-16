@@ -5,6 +5,8 @@ export const load = async ({ locals, params }) => {
     throw error(500, "Database Issue");
   }
 
+  const authorizedUsers = await locals.postgres.query("SELECT customer_name, rel_code FROM customer_to_boxes JOIN customers ON customer_to_boxes.customer_id = customers.customer_id WHERE box_id = $1", [params.box_id]);
+
   const boxResult = await locals.postgres.query(
     "SELECT box_id, box_number, branches.branch_id, branch_address, branch_name, payment_status FROM branches JOIN boxes ON branches.branch_id = boxes.branch_id WHERE box_id = $1",
     [params.box_id]
@@ -26,6 +28,7 @@ export const load = async ({ locals, params }) => {
   );
 
   return {
+    authorizedUsers: authorizedUsers.rows,
     box: boxResult.rows[0],
     payment: paymentResult.rows[0],
     boxHistory: boxHistoryResult.rows,
