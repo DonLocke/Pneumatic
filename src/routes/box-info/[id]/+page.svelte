@@ -1,5 +1,6 @@
 <script lang="ts">
   export let data;
+  import History from '../../../widgets/History.svelte';
   const boxID = data.box.id;
   const branch = data.box.branch;
   const address = data.box.address;
@@ -68,7 +69,7 @@
       </div>
       <div class="box">
         <h1 class="title">History Information</h1>
-        <p>Coming in widget....</p>
+        <p><History {boxID}/></p>
       </div>
       <div class="box">
         <h1 class="title">Authorzed Users</h1>
