@@ -6,7 +6,7 @@ export const load = async ({ locals, params }) => {
   }
 
   const boxResult = await locals.postgres.query(
-    "SELECT box_id, box_number, branches.branch_id, branch_address, branch_name FROM branches JOIN boxes ON branches.branch_id = boxes.branch_id WHERE box_id = $1",
+    "SELECT box_id, box_number, branches.branch_id, branch_address, branch_name, payment_status FROM branches JOIN boxes ON branches.branch_id = boxes.branch_id WHERE box_id = $1",
     [params.box_id]
   );
 

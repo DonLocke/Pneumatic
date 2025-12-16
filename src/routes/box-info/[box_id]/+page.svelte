@@ -13,6 +13,13 @@
     <div class="title has-text-centered">Box {boxNumber} Information</div>
   </div>
 </section>
+
+<nav class="breadcrumb is-left-aligned">
+  <ul>
+    <li><a href="/">Home</a></li>
+  </ul>
+</nav>
+
 <div class="container mt-5">
   <div class="columns is-centered">
     <div class="column is-four-fifths">
@@ -63,11 +70,7 @@
           </div>
         </div>
       </div>
-      <div class="box">
-        <h1 class="title">Payment Information</h1>
-        <p class="subtitle">Payment Due: 01/01/2026</p>
-        <p>Payment Amount: 50$</p>
-      </div>
+      <Payment paymentInfo={data.payment}></Payment>
       <div class="box">
         <h1 class="title">History Information</h1>
         <p>Coming in widget....</p>
@@ -77,7 +80,6 @@
         <p class="subtitle">Primary User: Foo Bar III</p>
         <p>Coming in widget?</p>
       </div>
-      <Payment paymentInfo={data.payment}></Payment>
     </div>
   </div>
 </div>

@@ -8,7 +8,7 @@
   <div class="grid">
     <div class="cell">
       <p class="title is-4">Payment Info</p>
-      <p class="subtitle is-4">Status: PAID</p>
+      <p class="subtitle is-4">Status: {paymentInfo.payment_status}</p>
     </div>
     <div class="cell">
       <p class="title is-4">Last Payment</p>
