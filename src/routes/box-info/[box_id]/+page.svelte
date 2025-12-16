@@ -92,11 +92,6 @@
         paymentHistory={data.paymentHistory}
       ></Payment>
       <History boxHistory={data.boxHistory} />
-      <div class="box">
-        <h1 class="title">Authorzed Users</h1>
-        <p class="subtitle">Primary User: Foo Bar III</p>
-        <p>Coming in widget?</p>
-      </div>
       <Schedule appointments={data.appointment} branchName={branch}></Schedule>
     </div>
   </div>
