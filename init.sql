@@ -64,7 +64,11 @@ CREATE TABLE appointments (
 
 -- Add Data
 INSERT INTO customers (customer_id, customer_name, customer_username, customer_password) VALUES
-    (1, 'Dave Johnson', 'djohnson', 'password');
+    (1, 'Dave Johnson', 'djohnson', 'cakeisalie'),
+    (2, 'Joss Carter', 'carter2', 'police4life'),
+    (3, 'Lindon Arelius', 'lindon', 'twinstars'),
+    (4, 'Ronald McDonald', 'mickyd', 'happymeal'),
+    (5, 'Lucas Fox', 'lfox', 'webribedlucas');
 INSERT INTO branches (branch_id, branch_address, branch_name) VALUES
     (1, 'One Fountain Plz, Buffalo, NY 1403', 'Fountain Plaza'),
     (2, '6000 South Park Ave, Hamburg, NY 14075', 'Hamburg'),
@@ -82,7 +86,10 @@ INSERT INTO boxes (box_id, box_number, branch_id, box_cost, payment_status) VALU
     (10, 401, 3, 29.99, 'PAID'),
     (11, 599, 3, 29.99, 'PAID');
 INSERT INTO customer_to_boxes (box_id, customer_id, rel_code) VALUES
-    (1, 1, 'PRI');
+    (1, 1, 'PRI'),
+    (1, 5, 'SEC'),
+    (2, 2, 'PRI'),
+    (3, 3, 'PRI');
 INSERT INTO box_history (box_id, event_type, event_date) VALUES
     (1, 'opened', NOW() - INTERVAL '5 minutes'),
     (1, 'closed', NOW()),
