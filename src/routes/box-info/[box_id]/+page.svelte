@@ -1,7 +1,8 @@
 <script lang="ts">
+  import Payment from "../../../widgets/payment.svelte";
+  import History from "../../../widgets/history.svelte";
   export let data;
 
-  import History from "../../../widgets/history.svelte";
   const boxID = data.box.box_id;
   const boxNumber = data.box.box_number;
   const branch = data.box.branch_name;
@@ -77,6 +78,7 @@
         <p class="subtitle">Primary User: Foo Bar III</p>
         <p>Coming in widget?</p>
       </div>
+      <Payment paymentInfo={data.payment}></Payment>
     </div>
   </div>
 </div>
