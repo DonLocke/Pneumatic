@@ -1,12 +1,12 @@
 <script lang="ts">
+  import Payment from "../../../widgets/payment.svelte";
   export let data;
 
-  const boxID = data.box_id;
-  const boxNumber = data.box_number;
-  const branch = data.branch_name;
-  const address = data.branch_address;
+  const boxID = data.box.box_id;
+  const boxNumber = data.box.box_number;
+  const branch = data.box.branch_name;
+  const address = data.box.branch_address;
 </script>
-
 
 <section class="hero is-primary">
   <div class="hero-body">
@@ -77,6 +77,7 @@
         <p class="subtitle">Primary User: Foo Bar III</p>
         <p>Coming in widget?</p>
       </div>
+      <Payment paymentInfo={data.payment}></Payment>
     </div>
   </div>
 </div>
