@@ -1,5 +1,6 @@
 <script lang="ts">
   import Payment from "../../../widgets/payment.svelte";
+  import History from "../../../widgets/history.svelte";
   export let data;
 
   const boxID = data.box.box_id;
@@ -73,7 +74,7 @@
       <Payment paymentInfo={data.payment}></Payment>
       <div class="box">
         <h1 class="title">History Information</h1>
-        <p>Coming in widget....</p>
+        <History boxHistory={data.boxHistory} />
       </div>
       <div class="box">
         <h1 class="title">Authorzed Users</h1>
