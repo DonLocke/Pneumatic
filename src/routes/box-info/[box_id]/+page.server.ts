@@ -15,9 +15,20 @@ export const load = async ({ locals, params }) => {
     [params.box_id]
   );
 
-  const boxHistoryResult = await locals.postgres.query("SELECT box_history.box_id, box_number, event_type, event_date FROM box_history JOIN boxes ON box_history.box_id = boxes.box_id WHERE box_history.box_id = $1", 
+  const boxHistoryResult = await locals.postgres.query(
+    "SELECT box_history.box_id, box_number, event_type, event_date FROM box_history JOIN boxes ON box_history.box_id = boxes.box_id WHERE box_history.box_id = $1",
     [params.box_id]
   );
 
-  return {box: boxResult.rows[0], payment: paymentResult.rows[0], boxHistory: boxHistoryResult.rows};
+  const paymentHistory = await locals.postgres.query(
+    "SELECT payment_history.box_id, customer_id, payment_amount, payment_date FROM payment_history JOIN boxes ON payment_history_id = boxes.box_id WHERE payment_history.box_id = $1",
+    [params.box_id]
+  );
+
+  return {
+    box: boxResult.rows[0],
+    payment: paymentResult.rows[0],
+    boxHistory: boxHistoryResult.rows,
+    paymentHistory: paymentHistory.rows,
+  };
 };
