@@ -1,11 +1,11 @@
 <script lang="ts">
   export let data;
 
-  import History from "../../../widgets/History.svelte";
-  const boxID = data.box_id;
-  const boxNumber = data.box_number;
-  const branch = data.branch_name;
-  const address = data.branch_address;
+  import History from "../../../widgets/history.svelte";
+  const boxID = data.box.box_id;
+  const boxNumber = data.box.box_number;
+  const branch = data.box.branch_name;
+  const address = data.box.branch_address;
 </script>
 
 <section class="hero is-primary">
