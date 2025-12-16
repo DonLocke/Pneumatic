@@ -1,5 +1,3 @@
-import { json } from "@sveltejs/kit";
-
-export async function GET(event: Event) {
-  return json("1");
+export async function GET() {
+  return new Response("v1.0.0");
 }
