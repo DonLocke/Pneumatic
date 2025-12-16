@@ -71,7 +71,7 @@
       </div>
       <div class="box">
         <h1 class="title">History Information</h1>
-        <p><History {boxID} /></p>
+        <History boxHistory={data.boxHistory} />
       </div>
       <div class="box">
         <h1 class="title">Authorzed Users</h1>

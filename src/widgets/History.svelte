@@ -1,44 +1,28 @@
 <script lang="ts">
   export let boxHistory;
-  console.log(boxHistory);
-  //const boxID = boxHistory.box_id;
-  // const branch = data.box.branch;
-  // const address = data.box.address;
 </script>
 
-<div class="container mt-5">
-  <div class="columns is-centered">
-    <div class="column is-four-fifths">
-      <div class="box">
-        <div class="grid">
-          <div class="cell">
-            <p class="title is-4">Box Number</p>
-            <!-- <p class="subtitle is-4">test</p> -->
-          </div>
-          <div class="cell">
-            <p class="title is-4">Box Event</p>
-            <!-- <p class="subtitle is-4">{address}</p> -->
-          </div>
-          <div class="cell">
-            <p class="title is-4">Box Event Time</p>
-            <!-- <p class="subtitle is-4">{address}</p> -->
-          </div>
-          {#each boxHistory as history}
-            <div class="cell">
-              <p class="title is-4">{history.box_number}</p>
-              <!-- <p class="subtitle is-4">test</p> -->
-            </div>
-            <div class="cell">
-              <p class="title is-4">blah</p>
-              <!-- <p class="subtitle is-4">{address}</p> -->
-            </div>
-            <div class="cell">
-              <p class="title is-4">Box Event Time</p>
-              <!-- <p class="subtitle is-4">{address}</p> -->
-            </div>
-          {:else}{/each}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th><appr title="BoxNumber"> Box Number</appr></th>
+      <th><appr title="BoxEvent"> Box Event</appr></th>
+      <th><appr title="BoxEventTime"> Box Event Time</appr></th>
+    </tr>
+  </thead>
+  <tbody>
+    {#each boxHistory as history}
+      <tr>
+        <td>
+          {history.box_number}
+        </td>
+        <td>
+          {history.event_type}
+        </td>
+        <td>
+          {history.event_date}
+        </td>
+      </tr>
+    {:else}{/each}
+  </tbody>
+</table>
