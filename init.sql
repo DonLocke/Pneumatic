@@ -7,7 +7,9 @@ CREATE TABLE branches (
 
 CREATE TABLE customers (
     customer_id INT PRIMARY KEY,
-    customer_name TEXT
+    customer_name TEXT,
+    customer_username TEXT,
+    customer_password TEXT
 );
 
 CREATE TABLE boxes (
@@ -48,10 +50,20 @@ CREATE TABLE payment_history (
     FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
 );
 
+CREATE TABLE appointments (
+    appointment_id INT,
+    customer_id INT,
+    branch_id INT,
+    appointment_date TIMESTAMPTZ,
+    FOREIGN KEY (customer_id) references customers (customer_id),
+    FOREIGN KEY (branch_id) references branches (branch_id)
+);
+
 -- Add Data
-INSERT INTO customers (customer_id, customer_name) VALUES (1, 'Dave Johnson');
+INSERT INTO customers (customer_id, customer_name, customer_username, customer_password) VALUES (1, 'Dave Johnson', 'djohnson', 'password');
 INSERT INTO branches (branch_id, branch_address, branch_name) VALUES (1, '1 Seneca St. Buffalo NY, 14216', 'Seneca One');
 INSERT INTO boxes (box_id, box_number, branch_id, box_cost) VALUES (1, 1, 1, 29.99);
 INSERT INTO customer_to_boxes (box_id, customer_id, rel_code) VALUES (1, 1, 'PRI');
 INSERT INTO box_history (box_id, event_type) VALUES (1, 'opened');
 INSERT INTO payment_history (box_id, customer_id, payment_amount) VALUES (1, 1, 15.60);
+INSERT INTO appointments(appointment_id, customer_id, branch_id, appointment_date) VALUES (1, 1, 1, '2025-12-25 12:00:00-05:00');
