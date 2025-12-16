@@ -1,27 +1,14 @@
-import { Client } from "pg";
-import { json } from "@sveltejs/kit";
+import { error, json } from "@sveltejs/kit";
+import type { RequestHandler } from "./$types";
 
-const client = new Client({
-  user: "pneumatic",
-  password: "pneuword",
-  database: "pneumatic",
-  hostname: "localhost",
-  port: 5432
-});
+export const GET: RequestHandler = async ({ locals }) => {
 
-export async function GET(event: Event) {
-  // Connect to Local DB
-  try {
-    await client.connect();
-  } catch (e) {
-    console.error(e);
+  if(!locals?.postgres) {
+    throw error(500, "Database Issue");
   }
 
   // Test Query
-  const result = await client.query("SELECT box_number, branch_address FROM boxes JOIN branches ON boxes.branch_id = branches.branch_id");
-
-  // End Connetion
-  //await client.end();
+  const result = await locals.postgres.query("SELECT box_number, branch_address FROM boxes JOIN branches ON boxes.branch_id = branches.branch_id");
 
   return json(result.rows);
 }

@@ -19,14 +19,14 @@ CREATE TABLE boxes (
 CREATE TYPE box_event AS ENUM ('opened', 'closed');
 
 CREATE TABLE box_history (
-    box_number INT,
+    box_id INT,
     event_type box_event,
     event_date TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (box_number, event_date),
-    FOREIGN KEY (box_number) REFERENCES boxes (box_id)
+    PRIMARY KEY (box_id, event_date),
+    FOREIGN KEY (box_id) REFERENCES boxes (box_id)
 );
 
 -- Add Data
 INSERT INTO branches (branch_id, branch_address) VALUES (1, '1 Seneca St. Buffalo NY, 14216');
 INSERT INTO boxes (box_id, box_number, branch_id) VALUES (1, 1, 1);
-INSERT INTO box_history (box_number, event_type) VALUES (1, 'opened');
+INSERT INTO box_history (box_id, event_type) VALUES (1, 'opened');
