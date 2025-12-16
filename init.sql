@@ -34,7 +34,7 @@ CREATE TABLE customer_to_boxes (
     FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
 );
 
-CREATE TYPE box_event AS ENUM ('opened', 'closed');
+CREATE TYPE box_event AS ENUM ('OPEN', 'CLOSED');
 
 CREATE TABLE box_history (
     box_id INT,
@@ -91,9 +91,9 @@ INSERT INTO customer_to_boxes (box_id, customer_id, rel_code) VALUES
     (2, 2, 'PRI'),
     (3, 3, 'PRI');
 INSERT INTO box_history (box_id, event_type, event_date) VALUES
-    (1, 'opened', NOW() - INTERVAL '5 minutes'),
-    (1, 'closed', NOW()),
-    (2, 'opened', NOW());
+    (1, 'OPEN', NOW() - INTERVAL '5 minutes'),
+    (1, 'CLOSED', NOW()),
+    (2, 'OPEN', NOW());
 INSERT INTO payment_history (box_id, customer_id, payment_amount, payment_date) VALUES
     (1, 1, 15.60, NOW() - INTERVAL '2 years'),
     (1, 1, 15.60, NOW() - INTERVAL '1 year'),
