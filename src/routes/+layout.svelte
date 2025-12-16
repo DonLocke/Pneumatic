@@ -1,5 +1,6 @@
 <script lang="ts">
   import favicon from "$lib/assets/favicon.svg";
+  import logo from "$lib/assets/logo-primary.svg";
 
   let { children } = $props();
 </script>
@@ -15,12 +16,13 @@
 <nav class="navbar m-2">
   <div class="navbar-brand">
     <a class="button is-ghost" href="/">
-      <img src={favicon} alt="box" class="image is-64x64" />
+      <img src={logo} alt="box" class="image is-64x64" />
     </a>
   </div>
   <div class="navbar-menu is-active">
     <div class="navbar-end">
       <div class="navbar-item">
+        <button class="button is-primary is-outlined" type="submit">Open New Box</button>
         <form action="/login?/logout" method="POST">
           <button class="button is-primary" type="submit">Logout</button>
         </form>

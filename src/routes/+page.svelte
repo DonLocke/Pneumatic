@@ -2,16 +2,19 @@
     export let data;
 </script>
 
-<section class="hero is-primary">
+<section class="hero pb-5">
   <div class="hero-body">
-    <p class="title has-text-centered">SAFE BOX</p>
+    <p class="title">Welcome Back, {data.user.customer_name}!</p>
+    <p class="subtitle">Manage your Safety Deposit Boxes below.</p>
+    <hr class="has-background-primary" style="width: 4rem; height: .25rem" />
   </div>
 </section>
 
 <div class="container mt-5">
+  
     <div class="columns is-centered">
-        <div class="column is-half">
-            <h1 class="title has-text-centered">Welcome {data.user.customer_name}</h1>
+        <div class="column">
+            
         </div>
     </div>
   <div class="fixed-grid has-3-cols">
