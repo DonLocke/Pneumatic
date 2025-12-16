@@ -20,9 +20,13 @@
     </a>
   </div>
   <div class="navbar-menu is-active">
+    <div class="navbar-start">
+      <a href="/" class="navbar-item">Dashboard</a>
+      <a href="/" class="navbar-item">Reports</a>
+    </div>
     <div class="navbar-end">
       <div class="navbar-item">
-        <button class="button is-primary is-outlined" type="submit">Open New Box</button>
+        <a class="button is-primary is-outlined" href="/new-box">Open New Box</a>
         <form action="/login?/logout" method="POST">
           <button class="button is-primary" type="submit">Logout</button>
         </form>

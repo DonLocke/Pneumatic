@@ -11,12 +11,6 @@
 </section>
 
 <div class="container mt-5">
-  
-    <div class="columns is-centered">
-        <div class="column">
-            
-        </div>
-    </div>
   <div class="fixed-grid has-3-cols">
     <div class="grid is-col-min-15">
       {#each data.boxes as box}

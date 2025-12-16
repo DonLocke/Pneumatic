@@ -2,7 +2,9 @@
 CREATE TABLE branches (
     branch_id INT PRIMARY KEY, 
     branch_address TEXT,
-    branch_name TEXT
+    branch_name TEXT,
+    branch_open TIME,
+    branch_close TIME
 );
 
 CREATE TABLE customers (
@@ -69,10 +71,10 @@ INSERT INTO customers (customer_id, customer_name, customer_username, customer_p
     (3, 'Lindon Arelius', 'lindon', 'twinstars'),
     (4, 'Ronald McDonald', 'mickyd', 'happymeal'),
     (5, 'Lucas Fox', 'lfox', 'webribedlucas');
-INSERT INTO branches (branch_id, branch_address, branch_name) VALUES
-    (1, 'One Fountain Plz, Buffalo, NY 1403', 'Fountain Plaza'),
-    (2, '6000 South Park Ave, Hamburg, NY 14075', 'Hamburg'),
-    (3, '709 Elmwood Ave, Buffalo, NY 14203', 'Elmwood Plaza');
+INSERT INTO branches (branch_id, branch_address, branch_name, branch_open, branch_close) VALUES
+    (1, 'One Fountain Plz, Buffalo, NY 1403', 'Fountain Plaza', '08:00:00', '18:00:00'),
+    (2, '6000 South Park Ave, Hamburg, NY 14075', 'Hamburg', '07:30:00', '18:00:00'),
+    (3, '709 Elmwood Ave, Buffalo, NY 14203', 'Elmwood Plaza', '09:00:00', '20:00:00');
 INSERT INTO boxes (box_id, box_number, branch_id, box_cost) VALUES
     (1, 100, 1, 29.99),
     (2, 101, 1, 29.99),

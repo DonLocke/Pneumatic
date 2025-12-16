@@ -13,7 +13,15 @@ export const load = async ({ locals, params }) => {
   );
 
   const boxResult = await locals.postgres.query(
-    `SELECT boxes.box_id, box_number, branches.branch_id, branch_address, branch_name, payment_status 
+    `SELECT
+      boxes.box_id,
+      box_number,
+      branches.branch_id,
+      branch_address,
+      branch_name,
+      to_char(branch_open, 'FMHH12:MI AM') as branch_open,
+      to_char(branch_close, 'FMHH12:MI AM') as branch_close,
+      payment_status 
     FROM branches 
     JOIN boxes ON branches.branch_id = boxes.branch_id 
     JOIN customer_to_boxes ON boxes.box_id = customer_to_boxes.box_id
