@@ -7,4 +7,4 @@ COPY . .
 RUN deno install
 RUN deno run build
 
-CMD ["deno", "run", "--allow-env", "--allow-net", ".deno-deploy/server.ts"]
+CMD ["deno", "run", "--allow-env", "--allow-net", "--allow-read", ".deno-deploy/server.ts"]
