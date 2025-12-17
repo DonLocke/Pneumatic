@@ -8,7 +8,8 @@ export const load = async ({ locals, params }) => {
   const authorizedUsers = await locals.postgres.query(
     `SELECT customer_name, customers.customer_id, rel_code FROM customer_to_boxes 
     JOIN customers ON customer_to_boxes.customer_id = customers.customer_id 
-    WHERE box_id = $1`,
+    WHERE box_id = $1
+    ORDER BY rel_code ASC, customer_name ASC`,
     [params.box_id]
   );
 
