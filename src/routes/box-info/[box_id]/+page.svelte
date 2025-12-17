@@ -177,7 +177,7 @@
       </article>
     </div>
     <div class="column is-two-fifths">
-      <Schedule appointments={data.appointment} branchName={data.branch}
+      <Schedule appointments={data.appointment} branchName={data.box.branch_name} openScheduleAppointment={openScheduleModal}
       ></Schedule>
     </div>
 
