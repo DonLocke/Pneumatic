@@ -43,6 +43,18 @@
         </a>
       </div>
       {/each}
+      {#if data.boxes.length < 2}
+      <div class="cell">
+        <div style="outline: 2px dashed grey; border-radius: 5px; height: 100%; ">
+        </div>
+      </div>
+      {/if}
+      {#if data.boxes.length < 3}
+      <div class="cell">
+        <div style="outline: 2px dashed grey; border-radius: 5px; height: 100%; ">
+        </div>
+      </div>
+      {/if}
     </div>
   </div>
 </div>
