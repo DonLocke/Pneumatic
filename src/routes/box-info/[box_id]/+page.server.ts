@@ -87,10 +87,9 @@ export const load = async ({ locals, params }) => {
     boxHistory: boxHistoryResult.rows,
     paymentHistory: paymentHistory.rows,
     appointment: appointmentResult.rows,
-    customers: getAllCustomersResult.rows
+    customers: getAllCustomersResult.rows,
   };
 };
-
 
 export const actions = {
   schedule: async ({ request, locals }) => {
@@ -108,13 +107,12 @@ export const actions = {
     const date = form.get("date")?.toString();
     console.log(date);
     const time = form.get("time")?.toString();
-    const timeZoneOffset = "-05:00"; 
+    const timeZoneOffset = "-05:00";
     const branchId = form.get("branchId")?.toString();
     const boxId = form.get("boxId")?.toString();
     const isoString = `${date}T${time}${timeZoneOffset}`;
 
     console.log(boxId);
-    
 
     if (!date || !time) {
       throw error(400, "Missing required parameters: date and time");
@@ -161,19 +159,38 @@ export const actions = {
     redirect(303, `/box-info/${boxId}`);
   },
   payment: async ({ request, locals, params }) => {
-
     // Get Form Data
     const form = await request.formData();
     const amount = form.get("amount")?.toString();
 
     // Submit to DB
-    locals.postgres?.query(`
+    locals.postgres?.query(
+      `
       INSERT INTO payment_history
         (box_id, customer_id, payment_amount)
       VALUES
         ($1, $2, $3)
-      `, [params.box_id, locals.user, amount]);
+      `,
+      [params.box_id, locals.user, amount]
+    );
 
     redirect(303, `/box-info/${params.box_id}`);
-  }
+  },
+  transfer: async ({ request, locals, params }) => {
+    // Get Form Data
+    const form = await request.formData();
+    const newCustomer = form.get("customer_id")?.toString();
+
+    // Submit to DB
+    locals.postgres?.query(
+      `
+      UPDATE customer_to_boxes
+      SET customer_id = $2
+      WHERE box_id = $1
+      `,
+      [params.box_id, newCustomer]
+    );
+
+    redirect(303, "/");
+  },
 } satisfies Actions;
