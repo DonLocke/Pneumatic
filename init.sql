@@ -95,7 +95,8 @@ INSERT INTO customer_to_boxes (box_id, customer_id, rel_code, payment_status) VA
 INSERT INTO box_history (box_id, event_type, event_date) VALUES
     (1, 'OPEN', NOW() - INTERVAL '5 minutes'),
     (1, 'CLOSED', NOW()),
-    (2, 'OPEN', NOW());
+    (2, 'OPEN', NOW()),
+    (3, 'CLOSED', NOW() - INTERVAL '1 hour');
 INSERT INTO payment_history (box_id, customer_id, payment_amount, payment_date) VALUES
     (1, 1, 15.60, NOW() - INTERVAL '2 years'),
     (1, 1, 15.60, NOW() - INTERVAL '1 year'),
