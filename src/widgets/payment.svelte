@@ -20,7 +20,7 @@
     <form action="?/payment" method="post">
       <header class="modal-card-head">
         <p class="modal-card-title">Make A Payment</p>
-        <button class="delete" aria-label="close" onclick={togglePaymentModal}></button>
+        <button class="delete" aria-label="close" type="reset" onclick={togglePaymentModal}></button>
       </header>
       <section class="modal-card-body">
         <div class="field">
@@ -36,7 +36,7 @@
       <footer class="modal-card-foot">
         <div class="buttons">
           <button class="button is-success" type="submit" onclick={togglePaymentModal}>Submit</button>
-          <button class="button" onclick={togglePaymentModal}>Cancel</button>
+          <button class="button" type="reset" onclick={togglePaymentModal}>Cancel</button>
         </div>
       </footer>
     </form>

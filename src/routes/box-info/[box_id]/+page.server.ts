@@ -161,7 +161,7 @@ export const actions = {
   payment: async ({ request, locals, params }) => {
     // Get Form Data
     const form = await request.formData();
-    const amount = form.get("amount")?.toString();
+    const amount = form.get("amount")?.toString() || "0.00";
 
     // Submit to DB
     locals.postgres?.query(
