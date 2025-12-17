@@ -195,9 +195,11 @@ export const actions = {
       [params.box_id]
     );
 
+    console.log("GETALLPAYMENT: ", getAllPaymentsByMonthSum?.rows[0]);
+
     if (
-      getAllPaymentsByMonthSum?.rows[0].total_payment >=
-      getAllPaymentsByMonthSum?.rows[0].box_cost
+      parseFloat(getAllPaymentsByMonthSum?.rows[0].total_payment) >=
+      parseFloat(getAllPaymentsByMonthSum?.rows[0].box_cost)
     ) {
       await locals.postgres?.query(
         `
