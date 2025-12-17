@@ -132,7 +132,15 @@
       
       <div class="field mt-5">
         <div class="label is-1">Total</div>
-        <p class="subtitle">$25.99</p>
+        <p class="subtitle">$
+          {#if tier == "Sprint"}
+            12.99
+          {:else if tier == "Standard"}
+            26.99
+          {:else}
+            204.77
+          {/if}
+        </p>
       </div>
       {/if}
 
