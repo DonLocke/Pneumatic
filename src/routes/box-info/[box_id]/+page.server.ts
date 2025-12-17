@@ -193,4 +193,19 @@ export const actions = {
 
     redirect(303, "/");
   },
+  addAuthorizedUser: async ({ request, locals, params }) => {
+    // Get Form Data
+    const form = await request.formData();
+    const customerId = form.get("customer_id")?.toString();
+
+    locals.postgres?.query(
+      `
+      INSERT INTO customer_to_boxes
+        (customer_id, box_id, rel_code)
+      VALUES
+        ($1, $2, $3)
+      `,
+      [customerId, params.box_id, "SEC"]
+    );
+  },
 } satisfies Actions;
