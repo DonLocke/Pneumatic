@@ -98,8 +98,11 @@
         </div>
         <div class="cell">
           <p class="title is-4">Balance</p>
-          <p class="subtitle is-4" class:has-text-danger={balance < 0}>
-            {currencyFormatter.format(balance)}
+          <p
+            class="subtitle is-4"
+            class:has-text-danger={balance < 0}
+            class:has-text-primary={balance >= 0}
+            >{currencyFormatter.format(balance)}
           </p>
         </div>
       </div>
