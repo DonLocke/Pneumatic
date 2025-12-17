@@ -4,7 +4,7 @@
 
 <div class="box">
   <h1 class="title">History Information</h1>
-  <table class="table">
+  <table class="table is-fullwidth">
     <thead>
       <tr>
         <th><appr title="BoxNumber"> Box Number</appr></th>

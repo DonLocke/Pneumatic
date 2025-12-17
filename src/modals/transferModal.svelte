@@ -1,28 +1,53 @@
 <script lang="ts">
-    //export let data;
+  export let showModal: boolean = false;
+  export let boxNumber: number | string;
+  export let branch: string;
+  export let customers;
+
+  // Change this to "runes"
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
+  function closeModal() {
+    dispatch("close");
+  }
 </script>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th><appr title="BoxNumber"> Box Number</appr></th>
-            <th><appr title="BoxEvent"> Box Event</appr></th>
-            <th><appr title="BoxEventTime"> Box Event Time</appr></th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- {#each boxHistory as history}
-      <tr>
-        <td>
-          {history.box_number}
-        </td>
-        <td>
-          {history.event_type}
-        </td>
-        <td>
-          {history.event_date}
-        </td>
-      </tr>
-    {:else}{/each} -->
-    </tbody>
-</table>
+<div class="modal" class:is-active={showModal}>
+  <div class="modal-background" on:click={closeModal}></div>
+
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Transfer Safety Deposit Box</p>
+      <button class="delete" aria-label="close" on:click={closeModal}></button>
+    </header>
+
+    <section class="modal-card-body">
+      <div class="content">
+        <p>
+          You are initiating a transfer for Box **#{boxNumber}** at **{branch}**.
+        </p>
+
+        <div class="field">
+          <label class="label">Select A New Box Owner</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select>
+                {#each customers as customer}
+                  <option>{customer.customer_name}</option>
+                {:else}{/each}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="modal-card-foot">
+      <button class="button is-primary" on:click={closeModal}
+        >Confirm Box Transfer</button
+      >
+      <button class="button" on:click={closeModal}>Cancel</button>
+    </footer>
+  </div>
+</div>

@@ -32,12 +32,17 @@ export const load = async ({ locals, params }) => {
     "SELECT appointment_id, appointment_date, branch_id, customer_id FROM appointments WHERE branch_id = $1 AND customer_id=$2", [branchId, locals.user]
   );
 
+  const getAllCustomersResult = await locals.postgres.query(
+    "SELECT customer_id, customer_name FROM customers"
+  );
+
   return {
     authorizedUsers: authorizedUsers.rows,
     box: boxResult.rows[0],
     payment: paymentResult.rows[0],
     boxHistory: boxHistoryResult.rows,
     paymentHistory: paymentHistory.rows,
-    appointment: appointmentResult.rows
+    appointment: appointmentResult.rows,
+    customers: getAllCustomersResult.rows
   };
 };

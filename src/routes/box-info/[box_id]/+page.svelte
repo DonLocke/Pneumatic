@@ -1,4 +1,5 @@
 <script lang="ts">
+  import TransferModal from "../../../modals/transferModal.svelte";
   import Payment from "../../../widgets/payment.svelte";
   import Schedule from "../../../widgets/schedule.svelte";
   import History from "../../../widgets/history.svelte";
@@ -9,6 +10,17 @@
   const boxNumber = data.box.box_number;
   const branch = data.box.branch_name;
   const address = data.box.branch_address;
+  const customers = data.customers;
+
+  let showTransferModal = false;
+
+  function openTransferModal() {
+    showTransferModal = true;
+  }
+
+  function handleCloseModal() {
+    showTransferModal = false;
+  }
 </script>
 
 <section class="hero is-primary">
@@ -61,7 +73,8 @@
           </span>
           <p>Schedule</p>
         </div>
-        <div class="button is-ghost">
+
+        <button class="button is-ghost" on:click={openTransferModal}>
           <span class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
               <path
@@ -70,8 +83,8 @@
               />
             </svg>
           </span>
-          <p>Cancel Box</p>
-        </div>
+          <p>Transfer Box</p>
+        </button>
       </div>
       <div class="box">
         <div class="grid">
@@ -96,3 +109,11 @@
     </div>
   </div>
 </div>
+
+<TransferModal
+  showModal={showTransferModal}
+  {boxNumber}
+  {branch}
+  {customers}
+  on:close={handleCloseModal}
+/>
