@@ -6,7 +6,7 @@ export const load = async ({ locals, params }) => {
   }
 
   const authorizedUsers = await locals.postgres.query(
-    `SELECT customer_name, rel_code FROM customer_to_boxes 
+    `SELECT customer_name, customers.customer_id, rel_code FROM customer_to_boxes 
     JOIN customers ON customer_to_boxes.customer_id = customers.customer_id 
     WHERE box_id = $1`,
     [params.box_id]
@@ -207,5 +207,24 @@ export const actions = {
       `,
       [customerId, params.box_id, "SEC"]
     );
+  },
+  removeAuthorizedUser: async ({ request, locals, params }) => {
+    // Get Form Data
+    const form = await request.formData();
+    const customerId = form.get("customer_id")?.toString();
+
+    if (customerId === "") {
+      throw error(400, "Missing required parameter: customer_id");
+    }
+
+    locals.postgres?.query(
+      `
+      DELETE FROM customer_to_boxes
+      WHERE customer_id = $1 AND box_id = $2
+      `,
+      [customerId, params.box_id]
+    );
+
+    redirect(303, "/box-info/" + params.box_id);
   },
 } satisfies Actions;

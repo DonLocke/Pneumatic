@@ -1,14 +1,62 @@
 <script lang="ts">
+  import { invalidateAll } from "$app/navigation";
+
   export let authorizedUsers;
   export let customers;
 
-  let modalOpen = false;
+  let addUserModalOpen = false;
   function toggleAddAuthorizedModal() {
-    modalOpen = !modalOpen;
+    addUserModalOpen = !addUserModalOpen;
+  }
+
+  let customerToRemove = "";
+
+  let removeUserModalOpen = false;
+  function toggleRemoveModal(event: MouseEvent) {
+    if (!removeUserModalOpen) {
+      const button = event.currentTarget as HTMLButtonElement;
+      customerToRemove = button.value;
+    }
+    removeUserModalOpen = !removeUserModalOpen;
+  }
+
+  function closeAndRefresh(event: MouseEvent) {
+    toggleRemoveModal(event);
+    // invalidateAll();
   }
 </script>
 
-<div class="modal" class:is-active={modalOpen}>
+<div class="modal" class:is-active={removeUserModalOpen}>
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        Are you sure you want to remove this authorized user?
+      </p>
+    </header>
+    <section class="modal-card-body">
+      <div class="content">
+        <div class="buttons is-centered">
+          <form method="post" action="?/removeAuthorizedUser">
+            <input
+              type="hidden"
+              name="customer_id"
+              bind:value={customerToRemove}
+            />
+            <button class="button is-danger" onclick={closeAndRefresh}>
+              Confirm
+            </button>
+          </form>
+          <button class="button" type="reset" onclick={toggleRemoveModal}
+            >Cancel</button
+          >
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="modal" class:is-active={addUserModalOpen}>
   <div class="modal-background"></div>
   <div class="modal-card">
     <form action="?/addAuthorizedUser" method="post">
@@ -76,6 +124,8 @@
               <button
                 class="button is-danger is-inverted is-medium"
                 aria-label="Remove"
+                onclick={toggleRemoveModal}
+                value={user.customer_id}
               >
                 <span class="icon">
                   <i class="fa fa-trash fa-lg"></i>
