@@ -22,7 +22,6 @@
               class:is-success={box.payment_status == "PAID"}
               class:is-danger={box.payment_status == "UNPAID"}
               class:is-info={box.payment_status == "PENDING"}
-              class:is-warning={box.box_status == "OPEN"}
             >
               <div class="message-header">
                 {box.branch_name} Box #{box.box_number}
