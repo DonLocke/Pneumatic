@@ -31,7 +31,7 @@
                     <option value={customer.customer_id}
                       >{customer.customer_name}</option
                     >
-                  {:else}{/each}
+                  {/each}
                 </select>
               </div>
             </div>

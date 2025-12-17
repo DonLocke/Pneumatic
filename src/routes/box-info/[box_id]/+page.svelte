@@ -18,7 +18,6 @@
   let showScheduleModal = $state(false);
 
   async function openTransferModal() {
-    const response = await fetch("/transfer");
     showTransferModal = true;
   }
 
@@ -193,7 +192,10 @@
       ></Payment>
     </div>
     <div class="column">
-      <Users authorizedUsers={data.authorizedUsers} />
+      <Users
+        authorizedUsers={data.authorizedUsers}
+        customers={data.customers}
+      />
     </div>
 
     <!-- Row Four -->
