@@ -75,5 +75,6 @@ export const load = async ({ locals, params }) => {
     paymentHistory: paymentHistory.rows,
     appointment: appointmentResult.rows,
     customers: getAllCustomersResult.rows,
+    currentCustomer: locals.user
   };
 };

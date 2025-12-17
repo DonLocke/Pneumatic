@@ -5,7 +5,11 @@
   import Schedule from "../../../widgets/schedule.svelte";
   import History from "../../../widgets/history.svelte";
   import Users from "../../../widgets/users.svelte";
+    import ScheduleModal from "../../../modals/scheduleModal.svelte";
   export let data;
+
+  const boxData = data.box;
+  const currentCustomer = data.currentCustomer;
 
   const branch = data.box.branch_name;
   const address = data.box.branch_address;
@@ -15,6 +19,7 @@
   console.log(data.box.box_number);
 
   let showTransferModal = false;
+  let showScheduleModal = false;
 
   function openTransferModal() {
     showTransferModal = true;
@@ -22,6 +27,14 @@
 
   function handleCloseModal() {
     showTransferModal = false;
+  }
+
+  function openScheduleModal() {
+    showScheduleModal = true;
+  }
+
+  function handleCloseScheduleModal() {
+    showScheduleModal = false;
   }
 </script>
 
@@ -57,7 +70,9 @@
           </span>
           <p>Open</p>
         </button>
-        <button class="button is-primary is-inverted is-rounded">
+        <button class="button is-primary is-inverted is-rounded" 
+        on:click={openScheduleModal}
+        >
           <span class="icon">
             <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
@@ -128,4 +143,11 @@
   {branch}
   {customers}
   on:close={handleCloseModal}
+/>
+
+<ScheduleModal
+  showModal={showScheduleModal}
+  {boxData}
+  {currentCustomer}
+  on:close={handleCloseScheduleModal}
 />
