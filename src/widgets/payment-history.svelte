@@ -7,6 +7,7 @@
 <article class="message is-large">
   <div class="message-header">Payment History</div>
   <div class="message-body">
+    {#if paymentHistory.count > 0}
     <table class="table is-fullwidth">
       <thead>
         <tr>
@@ -27,5 +28,8 @@
         {:else}{/each}
       </tbody>
     </table>
+    {:else}
+    <p class="is-italic">No payment history to show.</p>
+    {/if}
   </div>
 </article>
