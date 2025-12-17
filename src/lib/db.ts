@@ -8,12 +8,4 @@ const pool = new Pool({
   port: 5432
 });
 
-export const connectToDB = async () =>  {
-  try {
-    console.log(pool.options.host);
-    return  await pool.connect();
-  } catch (e) {
-    console.error("Database Connection Error: ", e);
-    throw e;
-  }
-}
+export const connectToDB = async () => await pool.connect();
