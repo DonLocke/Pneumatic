@@ -17,11 +17,13 @@
             {/if}
           </div>
           <div class="cell">
+            {#if user.rel_code != "PRI"}
             <button class="button is-danger is-inverted is-medium" aria-label="Remove">
               <span class="icon">
                 <i class="fa fa-trash fa-lg"></i>
               </span>
             </button>
+            {/if}
           </div>
         {/each}
         <div class="cell"></div>
