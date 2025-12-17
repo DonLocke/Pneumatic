@@ -24,7 +24,6 @@
   }
 
   async function openBox() {
-    console.log("Currently: ", data.box.box_status);
     await fetch(`/api/${box_id}/open`, {
       method: 'GET'
     });
