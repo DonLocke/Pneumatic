@@ -16,8 +16,8 @@
   let showTransferModal = false;
   let showScheduleModal = false;
 
-  function openTransferModal() {
-    const response = await fetch('/transfer');
+  async function openTransferModal() {
+    const response = await fetch("/transfer");
     showTransferModal = true;
   }
 
@@ -34,18 +34,17 @@
   }
   async function openBox() {
     await fetch(`/api/${box_id}/open`, {
-      method: 'GET'
+      method: "GET",
     });
     invalidateAll();
   }
 
   async function closeBox() {
     await fetch(`/api/${box_id}/close`, {
-      method: 'GET'
+      method: "GET",
     });
     invalidateAll();
   }
-
 </script>
 
 <section class="hero">

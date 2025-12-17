@@ -6,6 +6,8 @@ export async function POST({ locals, params }) {
     [params.box_id]
   );
 
+  console.log(getBoxOwners?.rows);
+
   const result1 = await locals.postgres?.query(
     `UPDATE customer_to_boxes 
     SET customer_id = $1 
