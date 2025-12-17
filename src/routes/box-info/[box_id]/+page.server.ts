@@ -159,5 +159,14 @@ export const actions = {
     }
 
     redirect(303, `/box-info/${boxId}`);
+  },
+  payment: async ({ request, locals, params }) => {
+
+    // Get Form Data
+    const form = await request.formData();
+    const amount = form.get("amount")?.toString();
+    console.log("Made Payment $", amount);
+
+    redirect(303, `/box-info/${params.box_id}`);
   }
 } satisfies Actions;
