@@ -39,9 +39,22 @@ export const load = async ({ locals, params }) => {
   );
 
   const boxHistoryResult = await locals.postgres.query(
-    `SELECT box_history.box_id, box_number, event_type, event_date 
+    `SELECT
+      box_history.box_id,
+      box_number,
+      box_status,
+      event_type,
+      event_date
     FROM box_history 
-    JOIN boxes ON box_history.box_id = boxes.box_id 
+    JOIN boxes ON box_history.box_id = boxes.box_id
+    JOIN (SELECT
+        DISTINCT ON (box_id)
+          box_id,
+          event_type AS box_status
+        FROM box_history
+        ORDER BY box_id, event_date DESC
+        ) events 
+      ON boxes.box_id = events.box_id
     WHERE box_history.box_id = $1`,
     [params.box_id]
   );
