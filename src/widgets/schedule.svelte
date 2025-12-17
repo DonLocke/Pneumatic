@@ -1,8 +1,7 @@
 <script lang="ts">
   import { getFormattedDate, getFormattedTime } from "$lib/date";
 
-  export let appointments;
-  export let branchName;
+  let {openScheduleAppointment, appointments, branchName} = $props();
 </script>
 
 <div class="message is-large">
@@ -35,12 +34,12 @@
       </table>
     {:else}
       <div class="buttons is-centered">
-        <div class="button">
+        <button class="button" onclick={openScheduleAppointment}>
           <span class="icon has-text-primary">
             <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
           <p>Schedule an Appointment</p>
-        </div>
+        </button>
       </div>
     {/if}
   </div>
