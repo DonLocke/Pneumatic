@@ -2,7 +2,6 @@
   import { getFormattedDate } from "$lib/date";
 
   export let paymentHistory;
-  console.log("PAYMENT HISTORY:", paymentHistory);
 </script>
 
 <article class="message is-large">

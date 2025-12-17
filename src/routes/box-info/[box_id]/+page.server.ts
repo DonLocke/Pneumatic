@@ -116,14 +116,11 @@ export const actions = {
     // Get form data
     const form = await request.formData();
     const date = form.get("date")?.toString();
-    console.log(date);
     const time = form.get("time")?.toString();
     const timeZoneOffset = "-05:00";
     const branchId = form.get("branchId")?.toString();
     const boxId = form.get("boxId")?.toString();
     const isoString = `${date}T${time}${timeZoneOffset}`;
-
-    console.log(boxId);
 
     if (!date || !time) {
       throw error(400, "Missing required parameters: date and time");
@@ -195,8 +192,6 @@ export const actions = {
       [params.box_id]
     );
 
-    console.log("GETALLPAYMENT: ", getAllPaymentsByMonthSum?.rows[0]);
-
     if (
       parseFloat(getAllPaymentsByMonthSum?.rows[0].total_payment) >=
       parseFloat(getAllPaymentsByMonthSum?.rows[0].box_cost)
@@ -218,14 +213,16 @@ export const actions = {
     const form = await request.formData();
     const newCustomer = form.get("customer_id")?.toString();
 
+    console.log("newCustomer:", newCustomer);
+    console.log("box_id:", params.box_id);
     // Submit to DB
-    locals.postgres?.query(
+    await locals.postgres?.query(
       `
       UPDATE customer_to_boxes
-      SET customer_id = $2
-      WHERE box_id = $1
+      SET customer_id = $1
+      WHERE box_id = $2
       `,
-      [params.box_id, newCustomer]
+      [newCustomer, params.box_id]
     );
 
     redirect(303, "/");
