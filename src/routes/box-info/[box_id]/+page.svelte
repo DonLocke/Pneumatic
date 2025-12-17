@@ -34,20 +34,20 @@
     <div class="column"></div>
     <div class="column is-four-fifths">
       <div class="buttons is-centered are-large">
-        <div class="button">
-          <span class="icon has-text-primary">
+        <div class="button is-primary is-inverted">
+          <span class="icon">
             <i class="fa fa-unlock fa-lg" aria-hidden="true"></i>
           </span>
           <p>Open</p>
         </div>
-        <div class="button">
-          <span class="icon has-text-primary">
+        <div class="button is-primary is-inverted">
+          <span class="icon">
             <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
           <p>Schedule</p>
         </div>
-        <div class="button">
-          <span class="icon has-text-primary">
+        <div class="button is-primary is-inverted">
+          <span class="icon">
             <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
           </span>
           <p>Transfer Box</p>
