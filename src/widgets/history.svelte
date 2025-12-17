@@ -10,7 +10,6 @@
     <table class="table is-fullwidth">
       <thead>
         <tr>
-          <th><appr title="BoxNumber"> Box Number</appr></th>
           <th><appr title="BoxEvent"> Box Event</appr></th>
           <th><appr title="BoxEventTime"> Box Event Time</appr></th>
         </tr>
@@ -18,9 +17,6 @@
       <tbody>
         {#each boxHistory as history}
           <tr>
-            <td>
-              {history.box_number}
-            </td>
             <td
               class:has-text-success={history.event_type == "OPEN"}
               class:has-text-danger={history.event_type == "CLOSED"}

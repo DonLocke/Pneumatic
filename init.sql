@@ -31,7 +31,7 @@ CREATE TABLE customer_to_boxes (
     customer_id INT,
     rel_code relationship_code,
     payment_status box_payment_status DEFAULT 'PENDING',
-    PRIMARY KEY (box_id, customer_id),
+    PRIMARY KEY (box_id, customer_id, rel_code),
     FOREIGN KEY (box_id) REFERENCES boxes (box_id),
     FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
 );
@@ -88,8 +88,8 @@ INSERT INTO boxes (box_id, box_number, branch_id, box_cost) VALUES
     (10, 401, 3, 29.99),
     (11, 599, 3, 29.99);
 INSERT INTO customer_to_boxes (box_id, customer_id, rel_code, payment_status) VALUES
-    (1, 1, 'PRI', 'UNPAID'),
-    (1, 5, 'SEC', 'UNPAID'),
+    (1, 5, 'PRI', 'UNPAID'),
+    (1, 1, 'SEC', 'UNPAID'),
     (2, 2, 'PRI', 'UNPAID'),
     (3, 3, 'PRI', 'PENDING'),
     (4, 5, 'PRI', 'PAID'),

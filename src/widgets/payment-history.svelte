@@ -1,6 +1,5 @@
 <script lang="ts">
   import { getFormattedDate } from "$lib/date";
-
   export let paymentHistory;
 </script>
 
@@ -12,6 +11,7 @@
         <thead>
           <tr>
             <th><appr title="BoxNumber">Amount</appr></th>
+            <th><appr title="CustomerName">Payee</appr></th>
             <th><appr title="BoxEvent">Date</appr></th>
           </tr>
         </thead>
@@ -20,6 +20,9 @@
             <tr>
               <td>
                 ${history.payment_amount}
+              </td>
+              <td>
+                {history.customer_name}
               </td>
               <td>
                 {getFormattedDate(history.payment_date)}

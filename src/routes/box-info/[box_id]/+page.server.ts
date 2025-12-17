@@ -61,9 +61,10 @@ export const load = async ({ locals, params }) => {
   );
 
   const paymentHistory = await locals.postgres.query(
-    `SELECT payment_history.box_id, customer_id, payment_amount, payment_date 
+    `SELECT payment_history.box_id, customers.customer_id, customer_name, payment_amount, payment_date 
     FROM payment_history 
     JOIN boxes ON payment_history.box_id = boxes.box_id 
+    JOIN customers ON payment_history.customer_id = customers.customer_id
     WHERE payment_history.box_id = $1
     ORDER BY payment_date DESC`,
     [params.box_id]
@@ -220,9 +221,9 @@ export const actions = {
       `
       UPDATE customer_to_boxes
       SET customer_id = $1
-      WHERE box_id = $2
+      WHERE box_id = $2 AND customer_id = $3
       `,
-      [newCustomer, params.box_id]
+      [newCustomer, params.box_id, locals.user]
     );
 
     redirect(303, "/");

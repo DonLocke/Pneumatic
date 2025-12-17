@@ -201,10 +201,10 @@
 
     <!-- Row Four -->
     <div class="column is-two-fifths">
-      <PaymentHistory paymentHistory={data.paymentHistory} />
+      <History boxHistory={data.boxHistory} />
     </div>
     <div class="column is-three-fifths">
-      <History boxHistory={data.boxHistory} />
+      <PaymentHistory paymentHistory={data.paymentHistory} />
     </div>
   </div>
 </div>
