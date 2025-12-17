@@ -111,7 +111,7 @@
           </span>
           <p>Schedule</p>
         </button>
-        {#if data.box.payment_status == "PAID"}
+        {#if data.box.payment_status == "PAID" && data.authorizedUsers.length == 1}
           <button
             class="button is-primary is-inverted is-rounded"
             onclick={openTransferModal}
