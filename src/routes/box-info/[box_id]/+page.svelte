@@ -1,4 +1,5 @@
 <script lang="ts">
+  import TransferModal from "../../../modals/transferModal.svelte";
   import Payment from "../../../widgets/payment.svelte";
   import PaymentHistory from "../../../widgets/payment-history.svelte";
   import Schedule from "../../../widgets/schedule.svelte";
@@ -8,28 +9,44 @@
 
   const branch = data.box.branch_name;
   const address = data.box.branch_address;
+  const customers = data.customers;
+  const boxNumber = data.box.box_number;
+
+  console.log(data.box.box_number);
+
+  let showTransferModal = false;
+
+  function openTransferModal() {
+    showTransferModal = true;
+  }
+
+  function handleCloseModal() {
+    showTransferModal = false;
+  }
 </script>
 
 <section class="hero">
   <div class="hero-body">
     <p class="title is-1">Box #{data.box.box_number}</p>
-    <p class="subtitle is-4">{data.box.branch_name}
+    <p class="subtitle is-4">
+      {data.box.branch_name}
       <span
         class="tag is-primary ml-3"
         class:is-primary={data.box.payment_status == "PAID"}
         class:is-danger={data.box.payment_status == "UNPAID"}
-        >{data.box.payment_status}</span>
+        >{data.box.payment_status}</span
+      >
     </p>
     <hr
-    class:has-background-primary={data.box.payment_status == "PAID"}
-    class:has-background-danger={data.box.payment_status == "UNPAID"}
-    style="width: 4rem; height: .25rem" />
+      class:has-background-primary={data.box.payment_status == "PAID"}
+      class:has-background-danger={data.box.payment_status == "UNPAID"}
+      style="width: 4rem; height: .25rem"
+    />
   </div>
 </section>
 
 <div class="container">
   <div class="columns is-multiline">
-
     <!-- Row One -->
     <div class="column"></div>
     <div class="column is-four-fifths">
@@ -46,17 +63,14 @@
           </span>
           <p>Schedule</p>
         </button>
-        <button class="button is-primary is-inverted is-rounded">
+        <button
+          class="button is-primary is-inverted is-rounded"
+          on:click={openTransferModal}
+        >
           <span class="icon">
             <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
           </span>
           <p>Transfer Box</p>
-        </button>
-        <button class="button is-danger is-inverted is-rounded">
-          <span class="icon">
-            <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
-          </span>
-          <p>Cancel Box</p>
         </button>
       </div>
     </div>
@@ -78,7 +92,9 @@
             </div>
             <div class="cell">
               <p class="title is-4">Hours</p>
-              <p class="subtitle is-4">{data.box.branch_open} - {data.box.branch_close}</p>
+              <p class="subtitle is-4">
+                {data.box.branch_open} - {data.box.branch_close}
+              </p>
             </div>
           </div>
         </div>
@@ -105,3 +121,11 @@
     </div>
   </div>
 </div>
+
+<TransferModal
+  showModal={showTransferModal}
+  {boxNumber}
+  {branch}
+  {customers}
+  on:close={handleCloseModal}
+/>

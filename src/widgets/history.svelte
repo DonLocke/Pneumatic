@@ -1,7 +1,6 @@
 <script lang="ts">
   import { getFormattedDateTime } from "$lib/date";
 
-
   export let boxHistory;
 </script>
 
@@ -29,7 +28,7 @@
               {history.event_type}
             </td>
             <td>
-              { getFormattedDateTime(history.event_date) }
+              {getFormattedDateTime(history.event_date)}
             </td>
           </tr>
         {:else}{/each}

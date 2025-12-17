@@ -63,6 +63,10 @@ export const load = async ({ locals, params }) => {
     [branchId, locals.user]
   );
 
+  const getAllCustomersResult = await locals.postgres.query(
+    `SELECT customer_id, customer_name FROM customers`
+  );
+
   return {
     authorizedUsers: authorizedUsers.rows,
     box: boxResult.rows[0],
@@ -70,5 +74,6 @@ export const load = async ({ locals, params }) => {
     boxHistory: boxHistoryResult.rows,
     paymentHistory: paymentHistory.rows,
     appointment: appointmentResult.rows,
+    customers: getAllCustomersResult.rows,
   };
 };
