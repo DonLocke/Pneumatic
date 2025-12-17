@@ -72,6 +72,12 @@
           </span>
           <p>Transfer Box</p>
         </button>
+        <button class="button is-danger is-inverted is-rounded">
+          <span class="icon">
+            <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
+          </span>
+          <p>Cancel Box</p>
+        </button>
       </div>
     </div>
     <div class="column"></div>
