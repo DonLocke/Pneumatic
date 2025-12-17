@@ -17,7 +17,8 @@
   let showTransferModal = $state(false);
   let showScheduleModal = $state(false);
 
-  function openTransferModal() {
+  async function openTransferModal() {
+    const response = await fetch("/transfer");
     showTransferModal = true;
   }
 

@@ -91,7 +91,7 @@ INSERT INTO customer_to_boxes (box_id, customer_id, rel_code, payment_status) VA
     (1, 1, 'PRI', 'UNPAID'),
     (4, 5, 'PRI', 'PAID'),
     (1, 5, 'SEC', 'UNPAID'),
-    (6, 5, 'PRI', 'PENDING'),
+    (6, 1, 'PRI', 'PAID'),
     (2, 2, 'PRI', 'UNPAID'),
     (3, 3, 'PRI', 'PENDING');
 INSERT INTO box_history (box_id, event_type, event_date) VALUES
