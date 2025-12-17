@@ -1,15 +1,8 @@
 <script lang="ts">
-  export let showModal: boolean = false;
-  export let boxNumber: number | string;
-  export let branch: string;
-  export let customers;
-
-  // Change this to "runes"
-  import { createEventDispatcher } from "svelte";
-  const dispatch = createEventDispatcher();
+  let { onClose, showModal, boxNumber, branch, customers } = $props();
 
   function closeModal() {
-    dispatch("close");
+    onClose();
   }
 </script>
 
@@ -25,8 +18,7 @@
     <section class="modal-card-body">
       <div class="content">
         <p>
-          You are initiating a transfer for Box <strong>#{boxNumber}</strong> at
-          <strong>{branch}</strong>.
+          You are initiating a transfer for Box **#{boxNumber}** at **{branch}**.
         </p>
 
         <div class="field">
