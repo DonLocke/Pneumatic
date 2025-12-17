@@ -12,8 +12,8 @@
 
 <section class="hero">
   <div class="hero-body">
-    <p class="title">Box #{data.box.box_number}</p>
-    <p class="subtitle">{data.box.branch_name}
+    <p class="title is-1">Box #{data.box.box_number}</p>
+    <p class="subtitle is-4">{data.box.branch_name}
       <span
         class="tag is-primary ml-3"
         class:is-primary={data.box.payment_status == "PAID"}

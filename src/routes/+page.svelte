@@ -4,8 +4,8 @@
 
 <section class="hero pb-5">
   <div class="hero-body">
-    <p class="title">Welcome Back, {data.user.customer_name}!</p>
-    <p class="subtitle">Manage your Safety Deposit Boxes below.</p>
+    <p class="title is-1">Welcome Back, {data.user.customer_name}!</p>
+    <p class="subtitle is-4">Manage your Safety Deposit Boxes below.</p>
     <hr class="has-background-primary" style="width: 4rem; height: .25rem" />
   </div>
 </section>
