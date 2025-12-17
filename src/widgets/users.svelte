@@ -17,6 +17,7 @@
         <button
           class="delete"
           aria-label="close"
+          type="reset"
           onclick={toggleAddAuthorizedModal}
         ></button>
       </header>
@@ -47,9 +48,9 @@
             type="submit"
             onclick={toggleAddAuthorizedModal}>Submit</button
           >
-          <button class="button" onclick={toggleAddAuthorizedModal}
-            >Cancel</button
-          >
+          <button class="button" onclick={toggleAddAuthorizedModal} type="reset"
+            >Cancel
+          </button>
         </div>
       </footer>
     </form>
