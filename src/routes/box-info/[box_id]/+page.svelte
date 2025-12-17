@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import TransferModal from "../../../modals/transferModal.svelte";
-    import ScheduleModal from "../../../modals/scheduleModal.svelte";
+  import ScheduleModal from "../../../modals/scheduleModal.svelte";
   import Payment from "../../../widgets/payment.svelte";
   import PaymentHistory from "../../../widgets/payment-history.svelte";
   import Schedule from "../../../widgets/schedule.svelte";
@@ -14,14 +14,14 @@
 
   const box_id = $derived(page.params.box_id);
 
-  let showTransferModal = false;
+  let showTransferModal = $state(false);
   let showScheduleModal = $state(false);
 
   function openTransferModal() {
     showTransferModal = true;
   }
 
-  function handleCloseModal() {
+  function handleCloseTransferModal() {
     showTransferModal = false;
   }
 
@@ -34,18 +34,17 @@
   }
   async function openBox() {
     await fetch(`/api/${box_id}/open`, {
-      method: 'GET'
+      method: "GET",
     });
     invalidateAll();
   }
 
   async function closeBox() {
     await fetch(`/api/${box_id}/close`, {
-      method: 'GET'
+      method: "GET",
     });
     invalidateAll();
   }
-
 </script>
 
 <section class="hero">
@@ -75,14 +74,20 @@
     <div class="column is-four-fifths">
       <div class="buttons is-centered are-large">
         {#if data.box.box_status == "CLOSED"}
-          <button class="button is-primary is-inverted is-rounded" onclick={openBox}>
+          <button
+            class="button is-primary is-inverted is-rounded"
+            onclick={openBox}
+          >
             <span class="icon">
               <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
             </span>
             <p>Open</p>
           </button>
         {:else if data.box.box_status == "OPEN"}
-          <button class="button is-warning is-inverted is-rounded" onclick={closeBox}>
+          <button
+            class="button is-warning is-inverted is-rounded"
+            onclick={closeBox}
+          >
             <span class="icon">
               <i class="fa fa-unlock fa-lg" aria-hidden="true"></i>
             </span>
@@ -96,8 +101,10 @@
             <p>Open</p>
           </button>
         {/if}
-        <button class="button is-primary is-inverted is-rounded"
-        onclick={openScheduleModal}>
+        <button
+          class="button is-primary is-inverted is-rounded"
+          onclick={openScheduleModal}
+        >
           <span class="icon">
             <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
@@ -147,7 +154,8 @@
       </article>
     </div>
     <div class="column is-two-fifths">
-      <Schedule appointments={data.appointment} branchName={data.branch}></Schedule>
+      <Schedule appointments={data.appointment} branchName={data.branch}
+      ></Schedule>
     </div>
 
     <!-- Row Three -->
@@ -168,17 +176,15 @@
   </div>
 </div>
 
-<!--
 <TransferModal
+  onClose={handleCloseTransferModal}
   showModal={showTransferModal}
-  {box.box_number}
-  {branch}
-  {customers}
-  on:close={handleCloseModal}
-/>-->
+  boxNumber={data.box.box_number}
+  branch={data.box.branch_name}
+  customers={data.customers}
+/>
 <ScheduleModal
   onClose={handleCloseScheduleModal}
   showModal={showScheduleModal}
   boxData={data.box}
 />
-
