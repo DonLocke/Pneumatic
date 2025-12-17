@@ -32,6 +32,7 @@
   function handleCloseScheduleModal() {
     showScheduleModal = false;
   }
+
   async function openBox() {
     await fetch(`/api/${box_id}/open`, {
       method: "GET",
