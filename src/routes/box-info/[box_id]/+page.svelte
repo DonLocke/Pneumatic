@@ -9,7 +9,7 @@
   export let data;
 
   const boxData = data.box;
-  const currentCustomer = data.currentCustomer;
+  console.log(boxData);
 
   const branch = data.box.branch_name;
   const address = data.box.branch_address;
@@ -148,6 +148,5 @@
 <ScheduleModal
   showModal={showScheduleModal}
   {boxData}
-  {currentCustomer}
   on:close={handleCloseScheduleModal}
 />

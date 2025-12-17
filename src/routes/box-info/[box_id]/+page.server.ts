@@ -74,8 +74,7 @@ export const load = async ({ locals, params }) => {
     boxHistory: boxHistoryResult.rows,
     paymentHistory: paymentHistory.rows,
     appointment: appointmentResult.rows,
-    customers: getAllCustomersResult.rows,
-    currentCustomer: locals.user
+    customers: getAllCustomersResult.rows
   };
 };
 
@@ -94,49 +93,58 @@ export const actions = {
     // Get form data
     const form = await request.formData();
     const date = form.get("date")?.toString();
-    const time = form.get("time")?.toString();
     console.log(date);
-    console.log(time);
+    const time = form.get("time")?.toString();
+    const timeZoneOffset = "-05:00"; 
+    const branchId = form.get("branchId")?.toString();
+    const boxId = form.get("boxId")?.toString();
+    const isoString = `${date}T${time}${timeZoneOffset}`;
+
+    console.log(boxId);
+    
 
     if (!date || !time) {
       throw error(400, "Missing required parameters: date and time");
     }
 
-    // // Step 1: Look up branch_id from box_number
-    // const boxResult = await locals.postgres.query(
-    //   `SELECT branch_id FROM boxes WHERE box_number = $1`,
-    //   [boxNumber]
-    // );
+    // Step 1: Look up branch_id from box_number
+    const customerResult = await locals.postgres.query(
+      `SELECT customer_id FROM customers WHERE customer_id = $1`,
+      [locals.user]
+    );
 
-    // if (boxResult.rowCount === 0) {
-    //   throw error(404, `Box number ${boxNumber} not found`);
-    // }
+    if (customerResult.rowCount === 0) {
+      throw error(404, `Customer ID# ${locals.user} not found`);
+    }
 
-    // const branchId = boxResult.rows[0].branch_id;
+    const branchResult = await locals.postgres.query(
+      `SELECT branch_id FROM branches WHERE branch_id = $1`,
+      [branchId]
+    );
 
-    // // Step 2: Generate next appointment_id
-    // const maxIdResult = await locals.postgres.query(
-    //   `SELECT COALESCE(MAX(appointment_id), 0) + 1 AS next_id FROM appointments`
-    // );
+    if (customerResult.rowCount === 0) {
+      throw error(404, `Branch ID# ${branchId} not found`);
+    }
 
-    // const appointmentId = maxIdResult.rows[0].next_id;
+    // Step 2: Generate next appointment_id
+    const maxIdResult = await locals.postgres.query(
+      `SELECT COALESCE(MAX(appointment_id), 0) + 1 AS next_id FROM appointments`
+    );
 
-    // // Step 3: Insert appointment
-    // const insertResult = await locals.postgres.query(
-    //   `INSERT INTO appointments (appointment_id, customer_id, branch_id, appointment_date)
-    //    VALUES ($1, $2, $3, $4)
-    //    RETURNING appointment_id, customer_id, branch_id, appointment_date`,
-    //   [appointmentId, locals.user, branchId, appointmentDate]
-    // );
+    const appointmentId = maxIdResult.rows[0].next_id;
 
-    // if (insertResult.rowCount === 0) {
-    //   throw error(500, "Failed to create appointment");
-    // }
+    // Step 3: Insert appointment
+    const insertResult = await locals.postgres.query(
+      `INSERT INTO appointments (appointment_id, customer_id, branch_id, appointment_date)
+       VALUES ($1, $2, $3, $4)
+       RETURNING appointment_id, customer_id, branch_id, appointment_date`,
+      [appointmentId, locals.user, branchId, isoString]
+    );
 
-    // return {
-    //   success: true,
-    //   appointment: insertResult.rows[0]
-    // };
-    redirect(303, "/");
+    if (insertResult.rowCount === 0) {
+      throw error(500, "Failed to create appointment");
+    }
+
+    redirect(303, `/box-info/1`);
   }
 } satisfies Actions;

@@ -17,7 +17,7 @@
 <script lang="ts">
   export let showModal: boolean = false;
   export let boxData;
-  export let currentCustomer;
+  console.log(boxData);
 
   // Change this to "runes"
   import { createEventDispatcher } from "svelte";
@@ -62,6 +62,8 @@
             <input class="input" name="time" type="time"/>
           </div>
         </div>
+        <input type="hidden" name="branchId" value={boxData.branch_id} />
+        <input type="hidden" name="boxId" value={boxData.box_id} />
         
 
       </div>
