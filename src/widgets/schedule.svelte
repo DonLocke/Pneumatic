@@ -3,7 +3,6 @@
 
   export let appointments;
   export let branchName;
-
 </script>
 
 <div class="message is-large">

@@ -1,18 +1,16 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import TransferModal from "../../../modals/transferModal.svelte";
   import Payment from "../../../widgets/payment.svelte";
   import PaymentHistory from "../../../widgets/payment-history.svelte";
   import Schedule from "../../../widgets/schedule.svelte";
   import History from "../../../widgets/history.svelte";
   import Users from "../../../widgets/users.svelte";
-  export let data;
+  import type { PageData } from "./$types";
 
-  const branch = data.box.branch_name;
-  const address = data.box.branch_address;
-  const customers = data.customers;
-  const boxNumber = data.box.box_number;
+  let { data } = $props<{ data: PageData }>();
 
-  console.log(data.box.box_number);
+  const box_id = $derived(page.params.box_id);
 
   let showTransferModal = false;
 
@@ -23,6 +21,23 @@
   function handleCloseModal() {
     showTransferModal = false;
   }
+
+  async function openBox() {
+    console.log("Currently: ", data.boxHistory.box_status);
+    const response = await fetch(`/api/${box_id}/open`, {
+      method: 'GET'
+    });
+    console.log(await response.text());
+  }
+
+  async function closeBox() {
+    console.log("Currently: ", data.boxHistory.box_status);
+    const response = await fetch(`/api/${box_id}/close`, {
+      method: 'GET'
+    });
+    console.log(await response.text());
+  }
+
 </script>
 
 <section class="hero">
@@ -51,12 +66,29 @@
     <div class="column"></div>
     <div class="column is-four-fifths">
       <div class="buttons is-centered are-large">
-        <button class="button is-primary is-inverted is-rounded">
-          <span class="icon">
-            <i class="fa fa-unlock fa-lg" aria-hidden="true"></i>
-          </span>
-          <p>Open</p>
-        </button>
+        {data.boxHistory.box_status}
+        {#if data.boxHistory.box_status == "CLOSED"}
+          <button class="button is-primary is-inverted is-rounded" onclick={openBox}>
+            <span class="icon">
+              <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+            </span>
+            <p>Open</p>
+          </button>
+        {:else if data.boxHistory.box_status == "OPEN"}
+          <button class="button is-warning is-inverted is-rounded" onclick={closeBox}>
+            <span class="icon">
+              <i class="fa fa-unlock fa-lg" aria-hidden="true"></i>
+            </span>
+            <p>Close</p>
+          </button>
+        {:else}
+          <button class="button is-rounded" disabled onclick={closeBox}>
+            <span class="icon">
+              <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+            </span>
+            <p>Open</p>
+          </button>
+        {/if}
         <button class="button is-primary is-inverted is-rounded">
           <span class="icon">
             <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
@@ -65,7 +97,7 @@
         </button>
         <button
           class="button is-primary is-inverted is-rounded"
-          on:click={openTransferModal}
+          onclick={openTransferModal}
         >
           <span class="icon">
             <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
@@ -90,11 +122,11 @@
           <div class="grid">
             <div class="cell">
               <p class="title is-4">Branch</p>
-              <p class="subtitle is-4">{branch}</p>
+              <p class="subtitle is-4">{data.box.branch_name}</p>
             </div>
             <div class="cell is-row-from-end-1">
               <p class="title is-4">Address</p>
-              <p class="subtitle is-4">{address}</p>
+              <p class="subtitle is-4">{data.address}</p>
             </div>
             <div class="cell">
               <p class="title is-4">Hours</p>
@@ -107,7 +139,7 @@
       </article>
     </div>
     <div class="column is-two-fifths">
-      <Schedule appointments={data.appointment} branchName={branch}></Schedule>
+      <Schedule appointments={data.appointment} branchName={data.branch}></Schedule>
     </div>
 
     <!-- Row Three -->
@@ -128,10 +160,12 @@
   </div>
 </div>
 
+<!--
 <TransferModal
   showModal={showTransferModal}
-  {boxNumber}
+  {box.box_number}
   {branch}
   {customers}
   on:close={handleCloseModal}
 />
+-->
