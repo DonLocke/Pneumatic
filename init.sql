@@ -91,12 +91,31 @@ INSERT INTO customer_to_boxes (box_id, customer_id, rel_code, payment_status) VA
     (1, 1, 'PRI', 'UNPAID'),
     (1, 5, 'SEC', 'UNPAID'),
     (2, 2, 'PRI', 'UNPAID'),
-    (3, 3, 'PRI', 'PENDING');
+    (3, 3, 'PRI', 'PENDING'),
+    (4, 5, 'PRI', 'PAID'),
+    (5, 1, 'PRI', 'UNPAID'),
+    (6, 2, 'PRI', 'PAID'),
+    (6, 3, 'SEC', 'PAID'),
+    (7, 3, 'PRI', 'PAID'),
+    (8, 4, 'PRI', 'PENDING'),
+    (9, 5, 'PRI', 'PAID'),
+    (10, 1, 'PRI', 'PENDING'),
+    (10, 5, 'SEC', 'PENDING'),
+    (11, 1, 'PRI', 'PAID'),
+    (11, 2, 'SEC', 'PAID');
 INSERT INTO box_history (box_id, event_type, event_date) VALUES
     (1, 'OPEN', NOW() - INTERVAL '5 minutes'),
     (1, 'CLOSED', NOW()),
     (2, 'OPEN', NOW()),
-    (3, 'CLOSED', NOW() - INTERVAL '1 hour');
+    (3, 'CLOSED', NOW() - INTERVAL '1 hour'),
+    (4, 'CLOSED', NOW()),
+    (5, 'CLOSED', NOW()),
+    (6, 'CLOSED', NOW()),
+    (7, 'CLOSED', NOW()),
+    (8, 'CLOSED', NOW()),
+    (9, 'CLOSED', NOW()),
+    (10, 'CLOSED', NOW()),
+    (11, 'CLOSED', NOW());
 INSERT INTO payment_history (box_id, customer_id, payment_amount, payment_date) VALUES
     (1, 1, 15.60, NOW() - INTERVAL '2 years'),
     (1, 1, 15.60, NOW() - INTERVAL '1 year'),
@@ -104,7 +123,11 @@ INSERT INTO payment_history (box_id, customer_id, payment_amount, payment_date) 
     (7, 3, 29.99, NOW() - INTERVAL '25 days'),
     (8, 4, 29.99, NOW() - INTERVAL '30 days'),
     (9, 5, 29.99, NOW() - INTERVAL '35 days'),
-    (1, 1, 10.60, NOW() - INTERVAL '5 days'),
-    (1, 1, 4.60, NOW() - INTERVAL '9 days');
+    (4, 1, 29.99, NOW() - INTERVAL '5 days'),
+    (6, 1, 29.99, NOW() - INTERVAL '17 days'),
+    (7, 1, 29.99, NOW() - INTERVAL '11 days'),
+    (9, 1, 29.99, NOW() - INTERVAL '9 days'),
+    (10, 1, 29.99, NOW() - INTERVAL '7 days'),
+    (11, 1, 29.99, NOW() - INTERVAL '5 days');
 INSERT INTO appointments(appointment_id, customer_id, branch_id, appointment_date) VALUES
     (1, 1, 1, '2025-12-25 12:00:00-05:00');
