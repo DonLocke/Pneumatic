@@ -1,14 +1,20 @@
 export async function GET({ locals, params }) {
-  const response = await fetch('http://box-100.locke.casa/open', {
-    method: 'GET',
-    headers: { 'Content-Type': 'text/plain' }
-  });
+  let result;
 
-  const result = await response.text();
+  console.log("Opening Box #", params.box_id);
+  if(params.box_id == "1") {
+    const response = await fetch('http://box-100.locke.casa/open', {
+      method: 'GET',
+      headers: { 'Content-Type': 'text/plain' }
+    });
 
-  console.log(result);
-  if (result == "Opened") {
-    const pgResult = locals.postgres?.query("INSERT INTO box_history (box_id, event_type) VALUES ($1, 'OPEN')", [params.box_id]);
+    result = await response.text();
+    console.log("Box Repsonse: ", result);
+  }
+  
+
+  if (result == "Open") {
+    const pgResult = await locals.postgres?.query("INSERT INTO box_history (box_id, event_type) VALUES ($1, 'OPEN')", [params.box_id]);
     console.log("Database: ", pgResult);
 
     return new Response(result);

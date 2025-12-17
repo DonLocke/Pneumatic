@@ -23,7 +23,7 @@
   }
 
   async function openBox() {
-    console.log("Currently: ", data.boxHistory.box_status);
+    console.log("Currently: ", data.box.box_status);
     const response = await fetch(`/api/${box_id}/open`, {
       method: 'GET'
     });
@@ -31,7 +31,6 @@
   }
 
   async function closeBox() {
-    console.log("Currently: ", data.boxHistory.box_status);
     const response = await fetch(`/api/${box_id}/close`, {
       method: 'GET'
     });
@@ -66,15 +65,14 @@
     <div class="column"></div>
     <div class="column is-four-fifths">
       <div class="buttons is-centered are-large">
-        {data.boxHistory.box_status}
-        {#if data.boxHistory.box_status == "CLOSED"}
+        {#if data.box.box_status == "CLOSED"}
           <button class="button is-primary is-inverted is-rounded" onclick={openBox}>
             <span class="icon">
               <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
             </span>
             <p>Open</p>
           </button>
-        {:else if data.boxHistory.box_status == "OPEN"}
+        {:else if data.box.box_status == "OPEN"}
           <button class="button is-warning is-inverted is-rounded" onclick={closeBox}>
             <span class="icon">
               <i class="fa fa-unlock fa-lg" aria-hidden="true"></i>

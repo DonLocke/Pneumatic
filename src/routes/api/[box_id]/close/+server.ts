@@ -1,14 +1,21 @@
 export async function GET({ locals, params }) {
-  const response = await fetch('http://box-100.locke.casa/close', {
-    method: 'GET',
-    headers: { 'Content-Type': 'text/plain' }
-  });
+  let result;
 
-  const result = await response.text();
+  console.log("Closing Box #", params.box_id);
+  if(params.box_id == "1") {
+    const response = await fetch('http://box-100.locke.casa/close', {
+      method: 'GET',
+      headers: { 'Content-Type': 'text/plain' }
+    });
 
-  console.log(result);
+    result = await response.text();
+    console.log("Box Response: ", result);
+  }
+
+
   if (result == "Closed") {
-    locals.postgres?.query("INSERT INTO box_history (box_id, event_type) VALUES ($1, 'CLOSED')", [params.box_id]);
+    const pgResult = await locals.postgres?.query("INSERT INTO box_history (box_id, event_type) VALUES ($1, 'CLOSED')", [params.box_id]);
+    console.log("Database: ", pgResult);
 
     return new Response(result);
   } else {

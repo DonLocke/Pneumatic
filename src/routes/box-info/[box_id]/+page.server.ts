@@ -17,6 +17,7 @@ export const load = async ({ locals, params }) => {
       boxes.box_id,
       box_number,
       box_cost,
+      box_status,
       branches.branch_id,
       branch_address,
       branch_name,
@@ -26,6 +27,14 @@ export const load = async ({ locals, params }) => {
     FROM branches 
     JOIN boxes ON branches.branch_id = boxes.branch_id 
     JOIN customer_to_boxes ON boxes.box_id = customer_to_boxes.box_id
+    JOIN (SELECT
+        DISTINCT ON (box_id)
+          box_id,
+          event_type AS box_status
+        FROM box_history
+        ORDER BY box_id, event_date DESC
+        ) events 
+      ON boxes.box_id = events.box_id
     WHERE boxes.box_id = $1`,
     [params.box_id]
   );
@@ -42,19 +51,10 @@ export const load = async ({ locals, params }) => {
     `SELECT
       box_history.box_id,
       box_number,
-      box_status,
       event_type,
       event_date
     FROM box_history 
     JOIN boxes ON box_history.box_id = boxes.box_id
-    JOIN (SELECT
-        DISTINCT ON (box_id)
-          box_id,
-          event_type AS box_status
-        FROM box_history
-        ORDER BY box_id, event_date DESC
-        ) events 
-      ON boxes.box_id = events.box_id
     WHERE box_history.box_id = $1`,
     [params.box_id]
   );
