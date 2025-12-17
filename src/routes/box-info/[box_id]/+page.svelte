@@ -25,14 +25,14 @@
 
   async function openBox() {
     console.log("Currently: ", data.box.box_status);
-    const response = await fetch(`/api/${box_id}/open`, {
+    await fetch(`/api/${box_id}/open`, {
       method: 'GET'
     });
     invalidateAll();
   }
 
   async function closeBox() {
-    const response = await fetch(`/api/${box_id}/close`, {
+    await fetch(`/api/${box_id}/close`, {
       method: 'GET'
     });
     invalidateAll();
@@ -125,7 +125,7 @@
             </div>
             <div class="cell is-row-from-end-1">
               <p class="title is-4">Address</p>
-              <p class="subtitle is-4">{data.address}</p>
+              <p class="subtitle is-4">{data.box.branch_address}</p>
             </div>
             <div class="cell">
               <p class="title is-4">Hours</p>
