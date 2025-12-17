@@ -1,4 +1,4 @@
-import { error } from "@sveltejs/kit";
+import { error, redirect, type Actions } from "@sveltejs/kit";
 
 export const load = async ({ locals, params }) => {
   if (!locals?.postgres) {
@@ -87,6 +87,77 @@ export const load = async ({ locals, params }) => {
     boxHistory: boxHistoryResult.rows,
     paymentHistory: paymentHistory.rows,
     appointment: appointmentResult.rows,
-    customers: getAllCustomersResult.rows,
+    customers: getAllCustomersResult.rows
   };
 };
+
+
+export const actions = {
+  schedule: async ({ request, locals }) => {
+    // Authentication check
+    if (!locals.user) {
+      throw redirect(303, "/login");
+    }
+
+    if (!locals?.postgres) {
+      throw error(500, "Database Issue");
+    }
+
+    // Get form data
+    const form = await request.formData();
+    const date = form.get("date")?.toString();
+    console.log(date);
+    const time = form.get("time")?.toString();
+    const timeZoneOffset = "-05:00"; 
+    const branchId = form.get("branchId")?.toString();
+    const boxId = form.get("boxId")?.toString();
+    const isoString = `${date}T${time}${timeZoneOffset}`;
+
+    console.log(boxId);
+    
+
+    if (!date || !time) {
+      throw error(400, "Missing required parameters: date and time");
+    }
+
+    // Step 1: Look up branch_id from box_number
+    const customerResult = await locals.postgres.query(
+      `SELECT customer_id FROM customers WHERE customer_id = $1`,
+      [locals.user]
+    );
+
+    if (customerResult.rowCount === 0) {
+      throw error(404, `Customer ID# ${locals.user} not found`);
+    }
+
+    const branchResult = await locals.postgres.query(
+      `SELECT branch_id FROM branches WHERE branch_id = $1`,
+      [branchId]
+    );
+
+    if (customerResult.rowCount === 0) {
+      throw error(404, `Branch ID# ${branchId} not found`);
+    }
+
+    // Step 2: Generate next appointment_id
+    const maxIdResult = await locals.postgres.query(
+      `SELECT COALESCE(MAX(appointment_id), 0) + 1 AS next_id FROM appointments`
+    );
+
+    const appointmentId = maxIdResult.rows[0].next_id;
+
+    // Step 3: Insert appointment
+    const insertResult = await locals.postgres.query(
+      `INSERT INTO appointments (appointment_id, customer_id, branch_id, appointment_date)
+       VALUES ($1, $2, $3, $4)
+       RETURNING appointment_id, customer_id, branch_id, appointment_date`,
+      [appointmentId, locals.user, branchId, isoString]
+    );
+
+    if (insertResult.rowCount === 0) {
+      throw error(500, "Failed to create appointment");
+    }
+
+    redirect(303, `/box-info/${boxId}`);
+  }
+} satisfies Actions;

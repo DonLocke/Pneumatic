@@ -9,7 +9,7 @@
   <div class="message-header">Scheduled Appointments</div>
   <div class="message-body">
     {#if appointments.length > 0}
-      <table class="table is-fullwidth">
+      <table class="table">
         <thead>
           <tr>
             <th><appr title="Branch Name"> Branch</appr></th>
