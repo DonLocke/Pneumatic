@@ -5,7 +5,10 @@
 
   let modalOpen = false;
 
-  const date = new Date(paymentInfo.payment_date).toLocaleDateString();
+  let date = new Date();
+  if(paymentInfo){
+  date = new Date(paymentInfo?.payment_date).toLocaleDateString();
+  }
 
   const currencyFormatter = Intl.NumberFormat("en-US", {
     style: "currency",
@@ -83,7 +86,11 @@
         </div>
         <div class="cell">
           <p class="title is-4">Last Payment</p>
+          {#if paymentInfo}
           <p class="subtitle is-4">${paymentInfo.payment_amount} on {date}</p>
+          {:else}
+          <p class="subtitle is-4">N/A</p>
+          {/if}
         </div>
         <div class="cell">
           <p class="title is-4">Cost (Monthly)</p>
