@@ -40,10 +40,12 @@
       </section>
 
       <footer class="modal-card-foot">
-        <button class="button is-primary" onclick={closeModal}
+        <div class="buttons">
+        <button class="button is-primary" type="submit" onclick={closeModal}
           >Confirm Box Transfer</button
         >
-        <button class="button" onclick={closeModal}>Cancel</button>
+        <button class="button" type="reset" onclick={closeModal}>Cancel</button>
+        </div>
       </footer>
     </form>
   </div>
