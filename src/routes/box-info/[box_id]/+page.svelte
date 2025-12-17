@@ -18,7 +18,6 @@
   let showScheduleModal = $state(false);
 
   async function openTransferModal() {
-    const response = await fetch("/transfer");
     showTransferModal = true;
   }
 
@@ -112,20 +111,20 @@
           <p>Schedule</p>
         </button>
         {#if data.box.payment_status == "PAID"}
-        <button
-          class="button is-primary is-inverted is-rounded"
-          onclick={openTransferModal}
-        >
-          <span class="icon">
-            <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
-          </span>
-          <p>Transfer Box</p>
-        </button>
+          <button
+            class="button is-primary is-inverted is-rounded"
+            onclick={openTransferModal}
+          >
+            <span class="icon">
+              <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
+            </span>
+            <p>Transfer Box</p>
+          </button>
         {:else}
           <button
-          class="button is-rounded"
-          disabled
-          onclick={openTransferModal}
+            class="button is-rounded"
+            disabled
+            onclick={openTransferModal}
           >
             <span class="icon">
               <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
@@ -134,19 +133,19 @@
           </button>
         {/if}
         {#if data.box.payment_status == "PAID"}
-        <button class="button is-danger is-inverted is-rounded" >
-          <span class="icon">
-            <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
-          </span>
-          <p>Cancel Box</p>
-        </button>
+          <button class="button is-danger is-inverted is-rounded">
+            <span class="icon">
+              <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
+            </span>
+            <p>Cancel Box</p>
+          </button>
         {:else}
-        <button class="button is-rounded" disabled>
-          <span class="icon">
-            <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
-          </span>
-          <p>Cancel Box</p>
-        </button>
+          <button class="button is-rounded" disabled>
+            <span class="icon">
+              <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
+            </span>
+            <p>Cancel Box</p>
+          </button>
         {/if}
       </div>
     </div>
@@ -177,7 +176,10 @@
       </article>
     </div>
     <div class="column is-two-fifths">
-      <Schedule appointments={data.appointment} branchName={data.box.branch_name} openScheduleAppointment={openScheduleModal}
+      <Schedule
+        appointments={data.appointment}
+        branchName={data.box.branch_name}
+        openScheduleAppointment={openScheduleModal}
       ></Schedule>
     </div>
 
@@ -186,7 +188,10 @@
       <Payment boxInfo={data.box} paymentInfo={data.payment}></Payment>
     </div>
     <div class="column">
-      <Users authorizedUsers={data.authorizedUsers} />
+      <Users
+        authorizedUsers={data.authorizedUsers}
+        customers={data.customers}
+      />
     </div>
 
     <!-- Row Four -->
