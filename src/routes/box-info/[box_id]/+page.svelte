@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import TransferModal from "../../../modals/transferModal.svelte";
+  import ScheduleModal from "../../../modals/scheduleModal.svelte";
   import Payment from "../../../widgets/payment.svelte";
   import PaymentHistory from "../../../widgets/payment-history.svelte";
   import Schedule from "../../../widgets/schedule.svelte";
@@ -13,15 +14,15 @@
 
   const box_id = $derived(page.params.box_id);
 
-  let showTransferModal = false;
-  let showScheduleModal = false;
+  let showTransferModal = $state(false);
+  let showScheduleModal = $state(false);
 
   async function openTransferModal() {
     const response = await fetch("/transfer");
     showTransferModal = true;
   }
 
-  function handleCloseModal() {
+  function handleCloseTransferModal() {
     showTransferModal = false;
   }
 
@@ -110,6 +111,7 @@
           </span>
           <p>Schedule</p>
         </button>
+        {#if data.box.payment_status == "PAID"}
         <button
           class="button is-primary is-inverted is-rounded"
           onclick={openTransferModal}
@@ -119,12 +121,33 @@
           </span>
           <p>Transfer Box</p>
         </button>
-        <button class="button is-danger is-inverted is-rounded">
+        {:else}
+          <button
+          class="button is-rounded"
+          disabled
+          onclick={openTransferModal}
+          >
+            <span class="icon">
+              <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
+            </span>
+            <p>Transfer Box</p>
+          </button>
+        {/if}
+        {#if data.box.payment_status == "PAID"}
+        <button class="button is-danger is-inverted is-rounded" >
           <span class="icon">
             <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
           </span>
           <p>Cancel Box</p>
         </button>
+        {:else}
+        <button class="button is-rounded" disabled>
+          <span class="icon">
+            <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
+          </span>
+          <p>Cancel Box</p>
+        </button>
+        {/if}
       </div>
     </div>
     <div class="column"></div>
@@ -176,18 +199,15 @@
   </div>
 </div>
 
-<!--
 <TransferModal
+  onClose={handleCloseTransferModal}
   showModal={showTransferModal}
-  {box.box_number}
-  {branch}
-  {customers}
-  on:close={handleCloseModal}
+  boxNumber={data.box.box_number}
+  branch={data.box.branch_name}
+  customers={data.customers}
 />
-
 <ScheduleModal
+  onClose={handleCloseScheduleModal}
   showModal={showScheduleModal}
-  {boxData}
-  on:close={handleCloseScheduleModal}
+  boxData={data.box}
 />
--->

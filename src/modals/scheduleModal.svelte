@@ -15,15 +15,17 @@
 </div> -->
 
 <script lang="ts">
-  export let showModal: boolean = false;
-  export let boxData;
+  // let showModal: boolean = false;
+  // export let boxData;
+
+  let {onClose, showModal, boxData} = $props();
 
   // Change this to "runes"
-  import { createEventDispatcher } from "svelte";
-  const dispatch = createEventDispatcher();
+  // import { createEventDispatcher } from "svelte";
+  // const dispatch = createEventDispatcher();
 
   function closeModal() {
-    dispatch("close");
+    onClose();
   }
 </script>
 

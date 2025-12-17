@@ -159,5 +159,21 @@ export const actions = {
     }
 
     redirect(303, `/box-info/${boxId}`);
+  },
+  payment: async ({ request, locals, params }) => {
+
+    // Get Form Data
+    const form = await request.formData();
+    const amount = form.get("amount")?.toString();
+
+    // Submit to DB
+    locals.postgres?.query(`
+      INSERT INTO payment_history
+        (box_id, customer_id, payment_amount)
+      VALUES
+        ($1, $2, $3)
+      `, [params.box_id, locals.user, amount]);
+
+    redirect(303, `/box-info/${params.box_id}`);
   }
 } satisfies Actions;
