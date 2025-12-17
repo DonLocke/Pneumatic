@@ -187,11 +187,11 @@ export const actions = {
 
     const getAllPaymentsByMonthSum = await locals.postgres?.query(
       `SELECT 
-    SUM(payment_amount) as total_payment, box_cost
-    FROM payment_history 
-    JOIN boxes ON payment_history.box_id = boxes.box_id
-    WHERE boxes.box_id =$1 AND DATE_TRUNC('month', payment_date) = DATE_TRUNC('month', NOW())
-    GROUP BY boxes.box_cost`,
+      SUM(payment_amount) as total_payment, box_cost
+      FROM payment_history 
+      JOIN boxes ON payment_history.box_id = boxes.box_id
+      WHERE boxes.box_id =$1 AND DATE_TRUNC('month', payment_date) = DATE_TRUNC('month', NOW())
+      GROUP BY boxes.box_cost`,
       [params.box_id]
     );
 
