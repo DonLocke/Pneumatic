@@ -7,6 +7,7 @@
   import History from "../../../widgets/history.svelte";
   import Users from "../../../widgets/users.svelte";
   import type { PageData } from "./$types";
+  import { invalidateAll } from "$app/navigation";
 
   let { data } = $props<{ data: PageData }>();
 
@@ -27,14 +28,14 @@
     const response = await fetch(`/api/${box_id}/open`, {
       method: 'GET'
     });
-    console.log(await response.text());
+    invalidateAll();
   }
 
   async function closeBox() {
     const response = await fetch(`/api/${box_id}/close`, {
       method: 'GET'
     });
-    console.log(await response.text());
+    invalidateAll();
   }
 
 </script>

@@ -14,8 +14,7 @@ export async function GET({ locals, params }) {
 
 
   if (result == "Closed") {
-    const pgResult = await locals.postgres?.query("INSERT INTO box_history (box_id, event_type) VALUES ($1, 'CLOSED')", [params.box_id]);
-    console.log("Database: ", pgResult);
+    await locals.postgres?.query("INSERT INTO box_history (box_id, event_type) VALUES ($1, 'CLOSED')", [params.box_id]);
 
     return new Response(result);
   } else {
