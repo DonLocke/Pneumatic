@@ -185,7 +185,11 @@
 
     <!-- Row Three -->
     <div class="column is-half">
-      <Payment boxInfo={data.box} paymentInfo={data.payment}></Payment>
+      <Payment
+        boxInfo={data.box}
+        paymentInfo={data.payment}
+        totalPayments={data.totalPayments.total_payment}
+      ></Payment>
     </div>
     <div class="column">
       <Users

@@ -63,7 +63,8 @@ export const load = async ({ locals, params }) => {
     `SELECT payment_history.box_id, customer_id, payment_amount, payment_date 
     FROM payment_history 
     JOIN boxes ON payment_history.box_id = boxes.box_id 
-    WHERE payment_history.box_id = $1`,
+    WHERE payment_history.box_id = $1
+    ORDER BY payment_date DESC`,
     [params.box_id]
   );
 
@@ -80,6 +81,14 @@ export const load = async ({ locals, params }) => {
     `SELECT customer_id, customer_name FROM customers`
   );
 
+  const getAllPaymentsByMonthSum = await locals.postgres.query(
+    `SELECT 
+    SUM(payment_amount) as total_payment 
+    FROM payment_history 
+    WHERE box_id =$1 AND DATE_TRUNC('month', payment_date) = DATE_TRUNC('month', NOW())`,
+    [params.box_id]
+  );
+
   return {
     authorizedUsers: authorizedUsers.rows,
     box: boxResult.rows[0],
@@ -88,6 +97,7 @@ export const load = async ({ locals, params }) => {
     paymentHistory: paymentHistory.rows,
     appointment: appointmentResult.rows,
     customers: getAllCustomersResult.rows,
+    totalPayments: getAllPaymentsByMonthSum.rows[0]
   };
 };
 

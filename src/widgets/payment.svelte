@@ -1,13 +1,18 @@
 <script lang="ts">
   export let paymentInfo;
   export let boxInfo;
+  export let totalPayments;
 
   let modalOpen = false;
 
   const date = new Date(paymentInfo.payment_date).toLocaleDateString();
 
-  const currencyFormatter = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
-  const balance = paymentInfo.payment_amount - boxInfo.box_cost;
+  const currencyFormatter = Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  const balance = boxInfo.box_cost - totalPayments;
 
   function togglePaymentModal() {
     modalOpen = !modalOpen;
@@ -20,13 +25,18 @@
     <form action="?/payment" method="post">
       <header class="modal-card-head">
         <p class="modal-card-title">Make A Payment</p>
-        <button class="delete" aria-label="close" type="reset" onclick={togglePaymentModal}></button>
+        <button
+          class="delete"
+          aria-label="close"
+          type="reset"
+          onclick={togglePaymentModal}
+        ></button>
       </header>
       <section class="modal-card-body">
         <div class="field">
           <div class="label">Payment Amount</div>
           <p class="control has-icons-left">
-            <input type="text" class="input" name="amount" placeholder="0.00">
+            <input type="text" class="input" name="amount" placeholder="0.00" />
             <span class="icon is-small is-left">
               <i class="fa fa-dollar"></i>
             </span>
@@ -35,8 +45,14 @@
       </section>
       <footer class="modal-card-foot">
         <div class="buttons">
-          <button class="button is-success" type="submit" onclick={togglePaymentModal}>Submit</button>
-          <button class="button" type="reset" onclick={togglePaymentModal}>Cancel</button>
+          <button
+            class="button is-success"
+            type="submit"
+            onclick={togglePaymentModal}>Submit</button
+          >
+          <button class="button" type="reset" onclick={togglePaymentModal}
+            >Cancel</button
+          >
         </div>
       </footer>
     </form>
@@ -47,7 +63,11 @@
   <div class="message-header">
     Payment Information
 
-    <button class="button is-primary is-inverted is-rounded" aria-label="make payment" onclick={togglePaymentModal}>
+    <button
+      class="button is-primary is-inverted is-rounded"
+      aria-label="make payment"
+      onclick={togglePaymentModal}
+    >
       <span class="icon">
         <i class="fa fa-money"></i>
       </span>
@@ -71,7 +91,9 @@
         </div>
         <div class="cell">
           <p class="title is-4">Balance</p>
-          <p class="subtitle is-4" class:has-text-danger={balance<0}>{currencyFormatter.format(balance)}</p>
+          <p class="subtitle is-4" class:has-text-danger={balance < 0}>
+            {currencyFormatter.format(balance)}
+          </p>
         </div>
       </div>
     </div>
