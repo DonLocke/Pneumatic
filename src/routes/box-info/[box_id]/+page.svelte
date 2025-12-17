@@ -63,7 +63,7 @@
     <div class="column"></div>
 
     <!-- Row Two-->
-    <div class="column is-two-thirds">
+    <div class="column is-three-fifths">
       <article class="message is-large">
         <div class="message-header">Box Information</div>
         <div class="message-body">
@@ -84,7 +84,7 @@
         </div>
       </article>
     </div>
-    <div class="column is-one-third">
+    <div class="column is-two-fifths">
       <Schedule appointments={data.appointment} branchName={branch}></Schedule>
     </div>
 

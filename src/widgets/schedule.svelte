@@ -13,7 +13,6 @@
       <table class="table is-fullwidth">
         <thead>
           <tr>
-            <th><appr title="ID">ID</appr></th>
             <th><appr title="Branch Name"> Branch</appr></th>
             <th><appr title="Date"> Date</appr></th>
             <th><appr title="Time">Time</appr></th>
@@ -22,9 +21,6 @@
         <tbody>
           {#each appointments as appointment}
             <tr>
-              <td>
-                {appointment.appointment_id}
-              </td>
               <td>
                 {branchName}
               </td>
