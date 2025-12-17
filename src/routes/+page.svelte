@@ -1,5 +1,6 @@
 <script lang="ts">
-    export let data;
+  export let data;
+  console.log("data", data);
 </script>
 
 <section class="hero pb-5">
@@ -14,55 +15,62 @@
   <div class="fixed-grid has-3-cols">
     <div class="grid is-col-min-15">
       {#each data.boxes as box}
-      <div class="cell">
-        <a href="/box-info/{box.box_id}">
-          <div
-            class="message"
-            class:is-success={box.payment_status == 'PAID'}
-            class:is-danger={box.payment_status == 'UNPAID'}
-            class:is-info={box.payment_status == 'PENDING'}
-            class:is-warning={box.box_status == 'OPEN'}
-          >
-            <div class="message-header">
-              {box.branch_name} Box #{box.box_number}
-            </div>
-            <div class="message-body">
-              <div class="grid">
-                <div class="cell">
-                  <p class="subtitle">Box Status</p>
-                  <h5 class="title is-5">{box.box_status}</h5>
-                </div>
-                <div class="cell">
-                  <p class="subtitle">Payment Status</p>
-                  <p class="title is-5">{box.payment_status}</p>
+        <div class="cell">
+          <a href="/box-info/{box.box_id}">
+            <div
+              class="message"
+              class:is-success={box.payment_status == "PAID"}
+              class:is-danger={box.payment_status == "UNPAID"}
+              class:is-info={box.payment_status == "PENDING"}
+              class:is-warning={box.box_status == "OPEN"}
+            >
+              <div class="message-header">
+                {box.branch_name} Box #{box.box_number}
+              </div>
+              <div class="message-body">
+                <div class="grid">
+                  <div class="cell">
+                    <p class="subtitle">Box Status</p>
+                    <h5 class="title is-5">{box.box_status}</h5>
+                  </div>
+                  <div class="cell">
+                    <p class="subtitle">Payment Status</p>
+                    <p class="title is-5">{box.payment_status}</p>
+                  </div>
                 </div>
               </div>
-              
             </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
       {/each}
-      
+
       {#if data.boxes.length < 2}
-      <div class="cell">
-        <div class="level" style="outline: 2px dashed grey; border-radius: 5px; height: 100%;">
-          <div class="level-item has-text-centered">
-            <a class="button is-primary is-inverted is-rounded is-large" aria-label="Open New Box" href="/new-box">
-              <div class="icon has-text-centered">
-                <i class="fa fa-plus fa-2x"></i>
-              </div>
-            </a>
+        <div class="cell">
+          <div
+            class="level"
+            style="outline: 2px dashed grey; border-radius: 5px; height: 100%;"
+          >
+            <div class="level-item has-text-centered">
+              <a
+                class="button is-primary is-inverted is-rounded is-large"
+                aria-label="Open New Box"
+                href="/new-box"
+              >
+                <div class="icon has-text-centered">
+                  <i class="fa fa-plus fa-2x"></i>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
       {/if}
 
       {#if data.boxes.length < 3}
-      <div class="cell">
-        <div style="outline: 2px dashed grey; border-radius: 5px; height: 100%; ">
+        <div class="cell">
+          <div
+            style="outline: 2px dashed grey; border-radius: 5px; height: 100%; "
+          ></div>
         </div>
-      </div>
       {/if}
     </div>
   </div>

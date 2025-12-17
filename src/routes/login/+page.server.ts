@@ -6,26 +6,30 @@ export const actions = {
     const form = await request.formData();
     const username = form.get("username")?.toString();
     const password = form.get("password")?.toString();
-    const result = await locals.postgres?.query("SELECT customer_id, customer_name, customer_username, customer_password FROM customers WHERE customer_username = $1 AND customer_password = $2", [username, password]);
-    
+    const result = await locals.postgres?.query(
+      `SELECT customer_id, customer_name, customer_username, customer_password FROM customers 
+      WHERE customer_username = $1 AND customer_password = $2`,
+      [username, password]
+    );
+
     if (result?.rowCount != 1) {
       console.error("Failed Login: Couldn't find single user in database");
       throw redirect(303, "/login");
     }
-    
+
     const user = result?.rows[0];
     console.log("Logging in User: ", user);
-    
+
     cookies.set("sessionid", user.customer_id, {
       secure: false,
-      path: '/' 
+      path: "/",
     });
     redirect(303, "/");
   },
   logout: async ({ cookies, locals }) => {
-    cookies.delete("sessionid", { path: '/' })
+    cookies.delete("sessionid", { path: "/" });
     locals.user = null;
 
     throw redirect(303, "/login");
-  }
+  },
 } satisfies Actions;
