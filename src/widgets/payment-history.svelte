@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getFormattedDate } from "../date";
+  import { getFormattedDate } from "$lib/date";
 
   export let paymentHistory;
 </script>

@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { getFormattedDate, getFormattedTime } from "$lib/date";
+
   export let appointments;
   export let branchName;
 
-  import { getFormattedDate, getFormattedTime } from "../date";
 </script>
 
 <div class="message is-large">
