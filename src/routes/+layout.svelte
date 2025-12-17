@@ -23,12 +23,13 @@
       <img src={logo} alt="box" class="image is-64x64" />
     </a>
   </div>
+  {#if page.url.pathname != "/login"}
   <div class="navbar-menu is-active">
     <div class="navbar-start">
       <a href="/" class="navbar-item">Dashboard</a>
       <a href="/" class="navbar-item">Reports</a>
     </div>
-    {#if page.url.pathname != "/login"}
+    
       <div class="navbar-end">
         <div class="navbar-item">
           <a class="button is-primary is-outlined" href="/new-box"
@@ -38,8 +39,8 @@
             <button class="button is-primary" type="submit">Logout</button>
           </form>
         </div>
-      </div>{/if}
-  </div>
+      </div>
+  </div>{/if}
 </nav>
 
 {@render children()}
