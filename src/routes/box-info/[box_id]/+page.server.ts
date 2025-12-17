@@ -16,6 +16,7 @@ export const load = async ({ locals, params }) => {
     `SELECT
       boxes.box_id,
       box_number,
+      box_cost,
       branches.branch_id,
       branch_address,
       branch_name,
