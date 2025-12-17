@@ -10,6 +10,7 @@ const pool = new Pool({
 
 export const connectToDB = async () =>  {
   try {
+    console.log(pool.options.host);
     return  await pool.connect();
   } catch (e) {
     console.error("Database Connection Error: ", e);

@@ -1,5 +1,9 @@
 FROM denoland/deno:latest
 
+WORKDIR /sql
+
+COPY init.sql init.sql
+
 WORKDIR /app
 
 COPY . .
