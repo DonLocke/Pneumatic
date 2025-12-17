@@ -176,7 +176,10 @@
       </article>
     </div>
     <div class="column is-two-fifths">
-      <Schedule appointments={data.appointment} branchName={data.box.branch_name} openScheduleAppointment={openScheduleModal}
+      <Schedule
+        appointments={data.appointment}
+        branchName={data.box.branch_name}
+        openScheduleAppointment={openScheduleModal}
       ></Schedule>
     </div>
 
@@ -185,7 +188,10 @@
       <Payment boxInfo={data.box} paymentInfo={data.payment}></Payment>
     </div>
     <div class="column">
-      <Users authorizedUsers={data.authorizedUsers} />
+      <Users
+        authorizedUsers={data.authorizedUsers}
+        customers={data.customers}
+      />
     </div>
 
     <!-- Row Four -->

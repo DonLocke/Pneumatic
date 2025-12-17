@@ -1,5 +1,6 @@
 <script lang="ts">
   export let authorizedUsers;
+  export let customers;
 
   let modalOpen = false;
   function toggleAddAuthorizedModal() {
@@ -28,9 +29,9 @@
             <div class="control">
               <div class="select is-fullwidth">
                 <select name="customer_id">
-                  {#each authorizedUsers as user}
-                    <option value={user.customer_id}
-                      >{user.customer_name}</option
+                  {#each customers as customer}
+                    <option value={customer.customer_id}
+                      >{customer.customer_name}</option
                     >
                   {:else}{/each}
                 </select>
