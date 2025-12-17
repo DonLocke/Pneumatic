@@ -1,38 +1,69 @@
 <script lang="ts">
     export let data;
 </script>
-<section class="hero is-primary">
+
+<section class="hero pb-5">
   <div class="hero-body">
-    <p class="title has-text-centered">SAFE BOX</p>
+    <p class="title is-1">Welcome Back, {data.user.customer_name}!</p>
+    <p class="subtitle is-4">Manage your Safety Deposit Boxes below.</p>
+    <hr class="has-background-primary" style="width: 4rem; height: .25rem" />
   </div>
 </section>
+
 <div class="container mt-5">
-    <div class="columns is-centered">
-        <div class="column is-half">
-            <h1 class="title has-text-centered">Welcome {data.user.customer_name}</h1>
-        </div>
-    </div>
-
+  <div class="fixed-grid has-3-cols">
     <div class="grid is-col-min-15">
-        {#each data.boxes as box}
-        <div class="cell">
-            <div class="card">
-                <a href="/box-info/{box.box_id}">
-                    <header class="card-header">
-                        <p class="card-header-title">Box #{box.box_number}</p>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            <span class="has-text-weight-bold has-text-primary">Branch: </span>
-                            <span class="has-text-primary">{box.branch_name}</span>
-                        </div>
-                    </div>
-                </a>
+      {#each data.boxes as box}
+      <div class="cell">
+        <a href="/box-info/{box.box_id}">
+          <div
+            class="message"
+            class:is-success={box.payment_status == 'PAID'}
+            class:is-danger={box.payment_status == 'UNPAID'}
+            class:is-info={box.payment_status == 'PENDING'}
+            class:is-warning={box.box_status == 'OPEN'}
+          >
+            <div class="message-header">
+              {box.branch_name} Box #{box.box_number}
             </div>
+            <div class="message-body">
+              <div class="grid">
+                <div class="cell">
+                  <p class="subtitle">Box Status</p>
+                  <h5 class="title is-5">{box.box_status}</h5>
+                </div>
+                <div class="cell">
+                  <p class="subtitle">Payment Status</p>
+                  <p class="title is-5">{box.payment_status}</p>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </a>
+      </div>
+      {/each}
+      
+      {#if data.boxes.length < 2}
+      <div class="cell">
+        <div class="level" style="outline: 2px dashed grey; border-radius: 5px; height: 100%;">
+          <div class="level-item has-text-centered">
+            <a class="button is-primary is-inverted is-rounded is-large" aria-label="Open New Box" href="/new-box">
+              <div class="icon has-text-centered">
+                <i class="fa fa-plus fa-2x"></i>
+              </div>
+            </a>
+          </div>
         </div>
-        {/each}
-        
+      </div>
+      {/if}
 
+      {#if data.boxes.length < 3}
+      <div class="cell">
+        <div style="outline: 2px dashed grey; border-radius: 5px; height: 100%; ">
+        </div>
+      </div>
+      {/if}
     </div>
-    
+  </div>
 </div>

@@ -4,7 +4,7 @@ const pool = new Pool({
   user: "pneumatic",
   password: "pneuword",
   database: "pneumatic",
-  host: "localhost",
+  host: Deno.env.get("PG_HOST") ?? "localhost",
   port: 5432
 });
 

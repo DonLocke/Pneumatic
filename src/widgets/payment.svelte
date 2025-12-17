@@ -1,45 +1,35 @@
 <script lang="ts">
   export let paymentInfo;
-  export let paymentHistory;
   export let boxInfo;
 
   const date = new Date(paymentInfo.payment_date).toLocaleDateString();
+
+  const currencyFormatter = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'});
+  const balance = paymentInfo.payment_amount - boxInfo.box_cost;
 </script>
 
-<div class="box">
-  <h1 class="title">Payment Information</h1>
-  <div class="grid">
-    <div class="cell">
-      <p class="title is-4">Status</p>
-      <p class="subtitle is-4">{boxInfo.payment_status}</p>
-    </div>
-    <div class="cell">
-      <p class="title is-4">Last Payment</p>
-      <p class="subtitle is-4">Amount: {paymentInfo.payment_amount}</p>
-      <p class="subtitle is-4">Date: {date}</p>
-    </div>
-    <div class="cell">
-      <p class="title is-4">Payment History</p>
-      <table class="table">
-        <thead>
-          <tr>
-            <th><appr title="BoxNumber">Amount</appr></th>
-            <th><appr title="BoxEvent">Date</appr></th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each paymentHistory as history}
-            <tr>
-              <td>
-                {history.payment_amount}
-              </td>
-              <td>
-                {history.payment_date}
-              </td>
-            </tr>
-          {:else}{/each}
-        </tbody>
-      </table>
+<article class="message is-large">
+  <div class="message-header">Payment Information</div>
+  <div class="message-body">
+    <div class="fixed-grid">
+      <div class="grid">
+        <div class="cell">
+          <p class="title is-4">Status</p>
+          <p class="subtitle is-4">{boxInfo.payment_status}</p>
+        </div>
+        <div class="cell">
+          <p class="title is-4">Last Payment</p>
+          <p class="subtitle is-4">${paymentInfo.payment_amount} on {date}</p>
+        </div>
+        <div class="cell">
+          <p class="title is-4">Cost (Monthly)</p>
+          <p class="subtitle is-4">${boxInfo.box_cost}</p>
+        </div>
+        <div class="cell">
+          <p class="title is-4">Balance</p>
+          <p class="subtitle is-4" class:has-text-danger={balance<0}>{currencyFormatter.format(balance)}</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</article>
