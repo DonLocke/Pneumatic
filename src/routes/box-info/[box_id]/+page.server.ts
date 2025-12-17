@@ -145,6 +145,6 @@ export const actions = {
       throw error(500, "Failed to create appointment");
     }
 
-    redirect(303, `/box-info/1`);
+    redirect(303, `/box-info/${boxId}`);
   }
 } satisfies Actions;

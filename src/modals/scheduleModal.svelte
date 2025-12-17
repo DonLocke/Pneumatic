@@ -17,7 +17,6 @@
 <script lang="ts">
   export let showModal: boolean = false;
   export let boxData;
-  console.log(boxData);
 
   // Change this to "runes"
   import { createEventDispatcher } from "svelte";
