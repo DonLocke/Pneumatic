@@ -30,6 +30,7 @@
 <div class="container">
   <div class="columns is-multiline">
 
+    <!-- Row One -->
     <div class="column"></div>
     <div class="column is-four-fifths">
       <div class="buttons is-centered are-large">
@@ -55,6 +56,7 @@
     </div>
     <div class="column"></div>
 
+    <!-- Row Two-->
     <div class="column is-two-thirds">
       <article class="message is-large">
         <div class="message-header">Box Information</div>
@@ -80,18 +82,20 @@
       <Schedule appointments={data.appointment} branchName={branch}></Schedule>
     </div>
 
-    <div class="column">
+    <!-- Row Three -->
+    <div class="column is-half">
       <Payment boxInfo={data.box} paymentInfo={data.payment}></Payment>
     </div>
     <div class="column">
       <Users authorizedUsers={data.authorizedUsers} />
     </div>
 
-    <!--Widgets-->
-    <div class="column is-full">
+    <!-- Row Four -->
+    <div class="column is-two-fifths">
       <PaymentHistory paymentHistory={data.paymentHistory} />
+    </div>
+    <div class="column is-three-fifths">
       <History boxHistory={data.boxHistory} />
     </div>
-
   </div>
 </div>
