@@ -25,7 +25,8 @@
     <section class="modal-card-body">
       <div class="content">
         <p>
-          You are initiating a transfer for Box **#{boxNumber}** at **{branch}**.
+          You are initiating a transfer for Box <strong>#{boxNumber}</strong> at
+          <strong>{branch}</strong>.
         </p>
 
         <div class="field">
