@@ -201,10 +201,10 @@ export const actions = {
     ) {
       await locals.postgres?.query(
         `
-      UPDATE customer_to_boxes
-      SET payment_status = 'PAID'
-      WHERE box_id = $1
-      `,
+        UPDATE customer_to_boxes
+        SET payment_status = 'PAID'
+        WHERE box_id = $1
+        `,
         [params.box_id]
       );
     }
