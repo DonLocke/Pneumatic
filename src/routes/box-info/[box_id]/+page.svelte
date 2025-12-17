@@ -17,6 +17,7 @@
   let showScheduleModal = false;
 
   function openTransferModal() {
+    const response = await fetch('/transfer');
     showTransferModal = true;
   }
 
@@ -74,14 +75,20 @@
     <div class="column is-four-fifths">
       <div class="buttons is-centered are-large">
         {#if data.box.box_status == "CLOSED"}
-          <button class="button is-primary is-inverted is-rounded" onclick={openBox}>
+          <button
+            class="button is-primary is-inverted is-rounded"
+            onclick={openBox}
+          >
             <span class="icon">
               <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
             </span>
             <p>Open</p>
           </button>
         {:else if data.box.box_status == "OPEN"}
-          <button class="button is-warning is-inverted is-rounded" onclick={closeBox}>
+          <button
+            class="button is-warning is-inverted is-rounded"
+            onclick={closeBox}
+          >
             <span class="icon">
               <i class="fa fa-unlock fa-lg" aria-hidden="true"></i>
             </span>
@@ -95,8 +102,10 @@
             <p>Open</p>
           </button>
         {/if}
-        <button class="button is-primary is-inverted is-rounded"
-        onclick={openScheduleModal}>
+        <button
+          class="button is-primary is-inverted is-rounded"
+          onclick={openScheduleModal}
+        >
           <span class="icon">
             <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
@@ -146,7 +155,8 @@
       </article>
     </div>
     <div class="column is-two-fifths">
-      <Schedule appointments={data.appointment} branchName={data.branch}></Schedule>
+      <Schedule appointments={data.appointment} branchName={data.branch}
+      ></Schedule>
     </div>
 
     <!-- Row Three -->

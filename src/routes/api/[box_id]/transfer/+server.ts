@@ -1,5 +1,10 @@
-export async function PATCH({ locals, params }) {
+export async function POST({ locals, params }) {
   let result;
+
+  const getBoxOwners = await locals.postgres?.query(
+    `SELECT customer_id FROM customer_to_boxes WHERE box_id = $1`,
+    [params.box_id]
+  );
 
   const result1 = await locals.postgres?.query(
     `UPDATE customer_to_boxes 
