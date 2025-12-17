@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { invalidateAll } from "$app/navigation";
-
   export let authorizedUsers;
   export let customers;
 
@@ -18,11 +16,6 @@
       customerToRemove = button.value;
     }
     removeUserModalOpen = !removeUserModalOpen;
-  }
-
-  function closeAndRefresh(event: MouseEvent) {
-    toggleRemoveModal(event);
-    // invalidateAll();
   }
 </script>
 
@@ -43,7 +36,7 @@
               name="customer_id"
               bind:value={customerToRemove}
             />
-            <button class="button is-danger" onclick={closeAndRefresh}>
+            <button class="button is-danger" onclick={toggleRemoveModal}>
               Confirm
             </button>
           </form>

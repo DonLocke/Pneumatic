@@ -98,7 +98,7 @@ export const load = async ({ locals, params }) => {
     paymentHistory: paymentHistory.rows,
     appointment: appointmentResult.rows,
     customers: getAllCustomersResult.rows,
-    totalPayments: getAllPaymentsByMonthSum.rows[0]
+    totalPayments: getAllPaymentsByMonthSum.rows[0],
   };
 };
 

@@ -5,9 +5,9 @@
 
   let modalOpen = false;
 
-  let date = new Date();
-  if(paymentInfo){
-  date = new Date(paymentInfo?.payment_date).toLocaleDateString();
+  let date = "";
+  if (paymentInfo) {
+    date = new Date(paymentInfo?.payment_date).toLocaleDateString();
   }
 
   const currencyFormatter = Intl.NumberFormat("en-US", {
@@ -15,7 +15,7 @@
     currency: "USD",
   });
 
-  const balance = boxInfo.box_cost - totalPayments;
+  const balance = totalPayments - boxInfo.box_cost;
 
   function togglePaymentModal() {
     modalOpen = !modalOpen;
@@ -87,9 +87,9 @@
         <div class="cell">
           <p class="title is-4">Last Payment</p>
           {#if paymentInfo}
-          <p class="subtitle is-4">${paymentInfo.payment_amount} on {date}</p>
+            <p class="subtitle is-4">${paymentInfo.payment_amount} on {date}</p>
           {:else}
-          <p class="subtitle is-4">N/A</p>
+            <p class="subtitle is-4">N/A</p>
           {/if}
         </div>
         <div class="cell">
