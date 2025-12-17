@@ -74,10 +74,12 @@
       </section>
 
       <footer class="modal-card-foot">
+        <div class="buttons">
         <button class="button is-primary" onclick={closeModal} type="submit"
           >Schedule</button
         >
-        <button class="button" onclick={closeModal}>Cancel</button>
+        <button class="button" type="reset" onclick={closeModal}>Cancel</button>
+        </div>
       </footer>
     </form>
   </div>

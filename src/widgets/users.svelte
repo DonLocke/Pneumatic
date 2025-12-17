@@ -26,7 +26,7 @@
           <p>You are adding a new user for Box</p>
 
           <div class="field">
-            <label class="label">Select A New Box Owner</label>
+            <label class="label">Select a User to Add</label>
             <div class="control">
               <div class="select is-fullwidth">
                 <select name="customer_id">
