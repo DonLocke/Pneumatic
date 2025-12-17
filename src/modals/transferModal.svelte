@@ -1,10 +1,4 @@
 <script lang="ts">
-  // export let showModal: boolean = false;
-  // export let boxNumber: number | string;
-  // export let branch: string;
-  // export let customers;
-
-  //let {onClose, showModal, boxData} = $props();
   let { onClose, showModal, boxNumber, branch, customers } = $props();
 
   function closeModal() {
