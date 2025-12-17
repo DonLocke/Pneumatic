@@ -1,4 +1,4 @@
-import { error } from "@sveltejs/kit";
+import { error, redirect, type Actions } from "@sveltejs/kit";
 
 export const load = async ({ locals, params }) => {
   if (!locals?.postgres) {
@@ -78,3 +78,65 @@ export const load = async ({ locals, params }) => {
     currentCustomer: locals.user
   };
 };
+
+
+export const actions = {
+  schedule: async ({ request, locals }) => {
+    // Authentication check
+    if (!locals.user) {
+      throw redirect(303, "/login");
+    }
+
+    if (!locals?.postgres) {
+      throw error(500, "Database Issue");
+    }
+
+    // Get form data
+    const form = await request.formData();
+    const date = form.get("date")?.toString();
+    const time = form.get("time")?.toString();
+    console.log(date);
+    console.log(time);
+
+    if (!date || !time) {
+      throw error(400, "Missing required parameters: date and time");
+    }
+
+    // // Step 1: Look up branch_id from box_number
+    // const boxResult = await locals.postgres.query(
+    //   `SELECT branch_id FROM boxes WHERE box_number = $1`,
+    //   [boxNumber]
+    // );
+
+    // if (boxResult.rowCount === 0) {
+    //   throw error(404, `Box number ${boxNumber} not found`);
+    // }
+
+    // const branchId = boxResult.rows[0].branch_id;
+
+    // // Step 2: Generate next appointment_id
+    // const maxIdResult = await locals.postgres.query(
+    //   `SELECT COALESCE(MAX(appointment_id), 0) + 1 AS next_id FROM appointments`
+    // );
+
+    // const appointmentId = maxIdResult.rows[0].next_id;
+
+    // // Step 3: Insert appointment
+    // const insertResult = await locals.postgres.query(
+    //   `INSERT INTO appointments (appointment_id, customer_id, branch_id, appointment_date)
+    //    VALUES ($1, $2, $3, $4)
+    //    RETURNING appointment_id, customer_id, branch_id, appointment_date`,
+    //   [appointmentId, locals.user, branchId, appointmentDate]
+    // );
+
+    // if (insertResult.rowCount === 0) {
+    //   throw error(500, "Failed to create appointment");
+    // }
+
+    // return {
+    //   success: true,
+    //   appointment: insertResult.rows[0]
+    // };
+    redirect(303, "/");
+  }
+} satisfies Actions;

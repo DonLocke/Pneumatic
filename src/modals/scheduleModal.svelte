@@ -36,38 +36,43 @@
       <p class="modal-card-title">Schedule an Appointment</p>
       <button class="delete" aria-label="close" on:click={closeModal}></button>
     </header>
-
+<form method="POST" action="?/schedule">
     <section class="modal-card-body">
       <div class="content">
         <p>
           You are scheduling an appointment to access boxes at {boxData.branch_name}.
         </p>
+
+        
         <div class="field">
           <label class="label">Branch</label>
           <div class="control">
-            <input class="input" type="text" value={boxData.branch_name} disabled />
+            <input class="input" type="text" name="branch" value={boxData.branch_name} disabled />
           </div>
         </div>
         <div class="field">
           <label class="label">Day</label>
           <div class="control">
-            <input class="input" type="date"/>
+            <input class="input" name="date" type="date"/>
           </div>
         </div>
         <div class="field">
           <label class="label">Time</label>
           <div class="control">
-            <input class="input" type="time"/>
+            <input class="input" name="time" type="time"/>
           </div>
         </div>
+        
+
       </div>
     </section>
 
     <footer class="modal-card-foot">
-      <button class="button is-primary" on:click={closeModal}
+      <button class="button is-primary" on:click={closeModal} type="submit"
         >Schedule</button
       >
       <button class="button" on:click={closeModal}>Cancel</button>
     </footer>
+    </form>
   </div>
 </div>
