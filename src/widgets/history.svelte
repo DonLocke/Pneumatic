@@ -22,7 +22,10 @@
             <td>
               {history.box_number}
             </td>
-            <td>
+            <td
+              class:has-text-success={history.event_type == "OPEN"}
+              class:has-text-danger={history.event_type == "CLOSED"}
+            >
               {history.event_type}
             </td>
             <td>

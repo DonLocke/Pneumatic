@@ -18,7 +18,7 @@
         {#each paymentHistory as history}
           <tr>
             <td>
-              {history.payment_amount}
+              ${history.payment_amount}
             </td>
             <td>
               {getFormattedDate(history.payment_date)}
