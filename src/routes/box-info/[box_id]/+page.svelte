@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import TransferModal from "../../../modals/transferModal.svelte";
+    import ScheduleModal from "../../../modals/scheduleModal.svelte";
   import Payment from "../../../widgets/payment.svelte";
   import PaymentHistory from "../../../widgets/payment-history.svelte";
   import Schedule from "../../../widgets/schedule.svelte";
@@ -14,7 +15,7 @@
   const box_id = $derived(page.params.box_id);
 
   let showTransferModal = false;
-  let showScheduleModal = false;
+  let showScheduleModal = $state(false);
 
   function openTransferModal() {
     showTransferModal = true;
@@ -175,11 +176,10 @@
   {branch}
   {customers}
   on:close={handleCloseModal}
+/>-->
+<ScheduleModal
+  onClose={handleCloseScheduleModal}
+  showModal={showScheduleModal}
+  boxData={data.box}
 />
 
-<ScheduleModal
-  showModal={showScheduleModal}
-  {boxData}
-  on:close={handleCloseScheduleModal}
-/>
--->
