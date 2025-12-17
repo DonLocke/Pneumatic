@@ -175,7 +175,7 @@ export const actions = {
     const amount = form.get("amount")?.toString() || "0.00";
 
     // Submit to DB
-    locals.postgres?.query(
+    await locals.postgres?.query(
       `
       INSERT INTO payment_history
         (box_id, customer_id, payment_amount)
@@ -184,6 +184,30 @@ export const actions = {
       `,
       [params.box_id, locals.user, amount]
     );
+
+    const getAllPaymentsByMonthSum = await locals.postgres?.query(
+      `SELECT 
+      SUM(payment_amount) as total_payment, box_cost
+      FROM payment_history 
+      JOIN boxes ON payment_history.box_id = boxes.box_id
+      WHERE boxes.box_id =$1 AND DATE_TRUNC('month', payment_date) = DATE_TRUNC('month', NOW())
+      GROUP BY boxes.box_cost`,
+      [params.box_id]
+    );
+
+    if (
+      getAllPaymentsByMonthSum?.rows[0].total_payment >=
+      getAllPaymentsByMonthSum?.rows[0].box_cost
+    ) {
+      await locals.postgres?.query(
+        `
+        UPDATE customer_to_boxes
+        SET payment_status = 'PAID'
+        WHERE box_id = $1
+        `,
+        [params.box_id]
+      );
+    }
 
     redirect(303, `/box-info/${params.box_id}`);
   },
