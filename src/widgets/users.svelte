@@ -17,11 +17,10 @@
             {/if}
           </div>
           <div class="cell">
-            <button class="button is-large" aria-label="Remove">
-              <span class="icon has-text-danger">
-                <i class="fa fa-trash"></i>
+            <button class="button is-danger is-inverted is-medium" aria-label="Remove">
+              <span class="icon">
+                <i class="fa fa-trash fa-lg"></i>
               </span>
-              <span>Remove</span>
             </button>
           </div>
         {/each}
