@@ -18,7 +18,6 @@ export const actions = {
     }
 
     const user = result?.rows[0];
-    console.log("Logging in User: ", user);
 
     cookies.set("sessionid", user.customer_id, {
       secure: false,

@@ -14,6 +14,7 @@
   const box_id = $derived(page.params.box_id);
 
   let showTransferModal = false;
+  let showScheduleModal = false;
 
   function openTransferModal() {
     showTransferModal = true;
@@ -23,8 +24,14 @@
     showTransferModal = false;
   }
 
+  function openScheduleModal() {
+    showScheduleModal = true;
+  }
+
+  function handleCloseScheduleModal() {
+    showScheduleModal = false;
+  }
   async function openBox() {
-    console.log("Currently: ", data.box.box_status);
     await fetch(`/api/${box_id}/open`, {
       method: 'GET'
     });
@@ -88,7 +95,8 @@
             <p>Open</p>
           </button>
         {/if}
-        <button class="button is-primary is-inverted is-rounded">
+        <button class="button is-primary is-inverted is-rounded"
+        onclick={openScheduleModal}>
           <span class="icon">
             <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
@@ -166,5 +174,11 @@
   {branch}
   {customers}
   on:close={handleCloseModal}
+/>
+
+<ScheduleModal
+  showModal={showScheduleModal}
+  {boxData}
+  on:close={handleCloseScheduleModal}
 />
 -->

@@ -39,7 +39,5 @@ export const load: PageServerLoad = async ({ locals }) => {
     [locals.user]
   );
 
-  console.log("boxResults:", boxResults.rows);
-
   return { user: userResult.rows[0], boxes: boxResults.rows };
 };
