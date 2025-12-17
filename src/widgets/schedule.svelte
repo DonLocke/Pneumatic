@@ -41,8 +41,8 @@
     {:else}
       <div class="buttons is-centered">
         <div class="button">
-          <span class="icon has-text-success">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
+          <span class="icon has-text-primary">
+            <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
           <p>Schedule an Appointment</p>
         </div>

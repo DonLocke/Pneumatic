@@ -34,21 +34,27 @@
     <div class="column"></div>
     <div class="column is-four-fifths">
       <div class="buttons is-centered are-large">
-        <div class="button is-ghost">
-          <span class="icon has-text-success">
+        <div class="button">
+          <span class="icon has-text-primary">
             <i class="fa fa-unlock fa-lg" aria-hidden="true"></i>
           </span>
           <p>Open</p>
         </div>
-        <div class="button is-ghost">
-          <span class="icon has-text-success">
+        <div class="button">
+          <span class="icon has-text-primary">
             <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
           </span>
           <p>Schedule</p>
         </div>
-        <div class="button is-ghost">
-          <span class="icon has-text-success">
-            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+        <div class="button">
+          <span class="icon has-text-primary">
+            <i class="fa fa-exchange fa-lg" aria-hidden="true"></i>
+          </span>
+          <p>Transfer Box</p>
+        </div>
+        <div class="button is-danger is-inverted">
+          <span class="icon">
+            <i class="fa fa-ban fa-lg" aria-hidden="true"></i>
           </span>
           <p>Cancel Box</p>
         </div>
